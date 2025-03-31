@@ -10,22 +10,51 @@ namespace Code
     {
         public Vector2Int Position;
         public bool HasBuilding;
-        public long BuildingInstanceId;
+        public BuildingData Building;
     }
-    
+
     [Serializable]
     struct BuildingData
     {
-        public long InstanceId;
         public string TypeId;
         public byte Level;
     }
     
+    [Serializable]
     internal sealed class PlayerData
     {
+        [field:NonSerialized] public bool IsDirty { get; private set; } 
+        
         private List<CellData> _cells = new List<CellData>();
-        private List<BuildingData> _buildings = new List<BuildingData>();
+        
+        public void SetBuildingData(Vector2Int position, BuildingData buildingData)
+        {
+            IsDirty = true;
+            
+            if (_cells.All(cell => cell.Position != position))
+            {
+                _cells.Add(new CellData
+                {
+                    Position = position, 
+                    HasBuilding = true, 
+                    Building = buildingData
+                });
+                return;
+            }
+            
+            for (int i = 0; i < _cells.Count; i++)
+            {
+                if (_cells[i].Position == position) continue;
 
+                _cells[i] = new CellData
+                {
+                    Position = position,
+                    HasBuilding = true,
+                    Building = buildingData
+                };
+            }
+        }
+        
         public bool GetBuildingData(Vector2Int position, out BuildingData buildingData)
         {
             for (int i = 0; i < _cells.Count; i++)
@@ -33,7 +62,7 @@ namespace Code
                 if (_cells[i].Position == position)
                 {
                     if (!_cells[i].HasBuilding) break;
-                    buildingData = _buildings.First(building => building.InstanceId == _cells[i].BuildingInstanceId);
+                    buildingData = _cells[i].Building;
                     return true;
                 }
             }

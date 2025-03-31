@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Id>k__BackingField: Farm
   <DisplayName>k__BackingField: Farm
+  <DisplayDescription>k__BackingField: Some fancy description for a farm building.
+    Really creative too.
+  <BuyMenuIcon>k__BackingField: {fileID: 676391639, guid: 4ab0a59cd63005e40a3d825f960f9e5f,
+    type: 3}
   <Levels>k__BackingField:
-  - <ViewPrefab>k__BackingField: {fileID: 8009035716571030837, guid: be075cb8a5bfd7640a6053e6fd0c7139,
+  - <ViewPrefab>k__BackingField: {fileID: 8009035716571030837, guid: 2989b70ad1bd3d146963895a58f1718f,
       type: 3}
-  - <ViewPrefab>k__BackingField: {fileID: 8009035716571030837, guid: c6ceed15390c9ec4998b235fb34df195,
-      type: 3}
-  - <ViewPrefab>k__BackingField: {fileID: 8009035716571030837, guid: eef6aa2111268ae41a724d535aa34526,
+  - <ViewPrefab>k__BackingField: {fileID: 8009035716571030837, guid: ebe6ac07f616aea4ba855e4bba29b7b5,
       type: 3}

@@ -8,6 +8,8 @@ namespace Code
     {
         [field:SerializeField] public string Id { get; private set; }
         [field:SerializeField] public string DisplayName { get; private set; }
+        [field:SerializeField] public string DisplayDescription { get; private set; }
+        [field:SerializeField] public Sprite BuyMenuIcon { get; private set; }
         [field:SerializeField] public BuildingLevel[] Levels { get; private set; }
     }
 

@@ -17,4 +17,14 @@ internal sealed class Map : MonoBehaviour
     {
         return (Vector2Int)_grid.WorldToCell(cell.transform.position);
     }
+
+    public void BuildBuilding(Cell currentCell, string selectedOptionId)
+    {
+        BuildingData buildingData = new BuildingData
+        {
+            Level = 1, 
+            TypeId = selectedOptionId
+        };
+        SystemLocator.I.PlayerData.SetBuildingData(GetPosition(currentCell), buildingData);
+    }
 }

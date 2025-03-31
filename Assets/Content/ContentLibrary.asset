@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea3de499baee453683c510deaa334400, type: 3}
   m_Name: ContentLibrary
   m_EditorClassIdentifier: 
-  Buildings:
+  <Buildings>k__BackingField:
   - {fileID: 11400000, guid: 1100e2edb228aca43b791ac4fa0209c9, type: 2}
+  - {fileID: 11400000, guid: 4f5f78d6d4d277e4dbdce7d34c985591, type: 2}
+  <BuildOptionUIPrefab>k__BackingField: {fileID: 3146991575909774057, guid: 94f3a42d3062b134599f71900b06612e,
+    type: 3}

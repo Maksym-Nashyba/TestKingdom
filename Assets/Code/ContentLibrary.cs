@@ -1,12 +1,15 @@
 ﻿using System.Linq;
+using Code.UI;
 using UnityEngine;
 
 namespace Code
 {
     [CreateAssetMenu(fileName = "ContentLibrary", menuName = "ScriptableObjects/ContentLibrary")]
-    public class ContentLibrary : ScriptableObject
+    internal sealed class ContentLibrary : ScriptableObject
     {
-        [field: SerializeField] public BuildingLine[] Buildings;
+        [field: SerializeField] public BuildingLine[] Buildings { get; private set; }
+        
+        [field: SerializeField] public BuildOptionUI BuildOptionUIPrefab {get; private set;}
 
         public BuildingLine GetBuilding(string buildingDataId)
         {
