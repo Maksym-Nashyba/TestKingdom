@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8182453227171439903}
   - component: {fileID: 2545971581307817977}
   m_Layer: 5
-  m_Name: ResourceRequirement
+  m_Name: ResourceCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -18,13 +18,15 @@ internal sealed class Map : MonoBehaviour
         return (Vector2Int)_grid.WorldToCell(cell.transform.position);
     }
 
-    public void BuildBuilding(Cell currentCell, string selectedOptionId)
+    public void BuildBuilding(Cell cell, string buildingTypeId)
     {
         BuildingData buildingData = new BuildingData
         {
             Level = 1, 
-            TypeId = selectedOptionId
+            TypeId = buildingTypeId
         };
-        SystemLocator.I.PlayerData.SetBuildingData(GetPosition(currentCell), buildingData);
+        SystemLocator.I.PlayerData.SetBuildingData(GetPosition(cell), buildingData);
+        
+        cell.DisplayBuildingView(buildingData);
     }
 }

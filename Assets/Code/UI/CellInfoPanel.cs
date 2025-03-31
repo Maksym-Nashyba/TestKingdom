@@ -39,6 +39,7 @@ namespace Code.UI
                 selectedOptionId =>
                 {
                     SystemLocator.I.Map.BuildBuilding(_currentCell, selectedOptionId);
+                    UpdateDisplayValues(_currentCell);
                     Show();
                 });
             Hide();
@@ -56,7 +57,12 @@ namespace Code.UI
         private void Display(Cell cell)
         {
             _currentCell = cell;
-            
+            UpdateDisplayValues(cell);
+            Show();
+        }
+
+        private void UpdateDisplayValues(Cell cell)
+        {
             Vector2Int position = SystemLocator.I.Map.GetPosition(cell);
             bool cellHasBuilding = SystemLocator.I.PlayerData.GetBuildingData(position, out BuildingData buildingData);
             
@@ -67,10 +73,8 @@ namespace Code.UI
             _levelText.text = cellHasBuilding
                 ? $"Level: {buildingData.Level}"
                 : "";
-            
-            Show();
         }
-
+        
         private void Show()
         {
             gameObject.SetActive(true);

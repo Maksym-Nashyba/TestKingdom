@@ -13,7 +13,7 @@ namespace Code.UI
         private Action<string> _onOptionSelected;
         private Action _onCanceled;
         private List<BuildOptionUI> _optionUIs = new();
-        
+
         private void Start()
         {
             _cancelButton.onClick.AddListener(OnCancelButton);
@@ -23,6 +23,7 @@ namespace Code.UI
         private void OnDestroy()
         {
             _cancelButton.onClick.RemoveListener(OnCancelButton);
+            SystemLocator.I.PlayerController.CellUnselected -= OnCellUnselected;
         }
 
         public void Display(string[] optionTypeIds, Action<string> onOptionSelected)
@@ -37,6 +38,7 @@ namespace Code.UI
                 _optionUIs.Add(optionUI);
             }
             
+            SystemLocator.I.PlayerController.CellUnselected += OnCellUnselected;
             gameObject.SetActive(true);
         }
 
@@ -47,6 +49,7 @@ namespace Code.UI
                 Destroy(optionUI.gameObject);
             }
             
+            SystemLocator.I.PlayerController.CellUnselected -= OnCellUnselected;
             _onOptionSelected = null;
             _onCanceled = null;
             _optionUIs.Clear();
@@ -60,7 +63,13 @@ namespace Code.UI
             Hide();
             _onCanceled?.Invoke();
         }
-        
+
+        private void OnCellUnselected(Cell obj)
+        {
+            Reset();
+            Hide();
+        }
+
         private void OnOptionSelected(string optionId)
         {
             Action<string> temp = _onOptionSelected;
