@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93bdea96689b416680920e2844c6b45c, type: 3}
+  m_Name: Farm
+  m_EditorClassIdentifier: 
+  <Id>k__BackingField: Farm
+  <DisplayName>k__BackingField: Farm
+  <Levels>k__BackingField:
+  - <ViewPrefab>k__BackingField: {fileID: 8009035716571030837, guid: be075cb8a5bfd7640a6053e6fd0c7139,
+      type: 3}
+  - <ViewPrefab>k__BackingField: {fileID: 8009035716571030837, guid: c6ceed15390c9ec4998b235fb34df195,
+      type: 3}
+  - <ViewPrefab>k__BackingField: {fileID: 8009035716571030837, guid: eef6aa2111268ae41a724d535aa34526,
+      type: 3}

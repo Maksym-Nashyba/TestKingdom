@@ -4,9 +4,10 @@ using UnityEngine;
 namespace Code
 {
     [CreateAssetMenu(fileName = "Building", menuName = "ScriptableObjects/Building")]
-    public class Building : ScriptableObject
+    public class BuildingLine : ScriptableObject
     {
-        [field:SerializeField] public string Name { get; private set; }
+        [field:SerializeField] public string Id { get; private set; }
+        [field:SerializeField] public string DisplayName { get; private set; }
         [field:SerializeField] public BuildingLevel[] Levels { get; private set; }
     }
 
