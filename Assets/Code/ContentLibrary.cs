@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Code.UI;
 using UnityEngine;
 
@@ -10,6 +11,8 @@ namespace Code
         [field: SerializeField] public BuildingLine[] Buildings { get; private set; }
         
         [field: SerializeField] public BuildOptionUI BuildOptionUIPrefab {get; private set;}
+        [field: SerializeField] public ResourceCounterUI ResourceCounterUIPrefab {get; private set;}
+        [field: SerializeField] public Sprite[] ResourceIcons { get; private set; } = new Sprite[Enum.GetValues(typeof(ResourceType)).Length];
 
         public BuildingLine GetBuilding(string buildingDataId)
         {

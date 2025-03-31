@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,12 +16,16 @@ namespace Code.UI
         
         private Cell _currentCell;
 
-        private void Start()
+        private void Awake()
         {
             SystemLocator.I.PlayerController.CellSelected += OnCellSelected;
             SystemLocator.I.PlayerController.CellUnselected += OnCellUnselected;
             _buildButton.onClick.AddListener(OnBuildButton);
             _clearButton.onClick.AddListener(OnClearButton);
+        }
+
+        private void Start()
+        {
             Hide();
         }
 

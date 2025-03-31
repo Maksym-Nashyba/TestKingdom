@@ -14,9 +14,13 @@ namespace Code.UI
         private Action _onCanceled;
         private List<BuildOptionUI> _optionUIs = new();
 
-        private void Start()
+        private void Awake()
         {
             _cancelButton.onClick.AddListener(OnCancelButton);
+        }
+
+        private void Start()
+        {
             Hide();
         }
 

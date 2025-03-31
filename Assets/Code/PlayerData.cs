@@ -26,6 +26,18 @@ namespace Code
         [field:NonSerialized] public bool IsDirty { get; private set; } 
         
         private List<CellData> _cells = new List<CellData>();
+        private int[] _resources = new int[Enum.GetValues(typeof(ResourceType)).Length];
+
+        public void SetResourceCount(ResourceType resourceType, int count)
+        {
+            _resources[(int)resourceType] = count;
+            IsDirty = true;
+        }
+        
+        public int GetResourceCount(ResourceType resourceType)
+        {
+            return _resources[(int)resourceType];
+        }
         
         public void SetBuildingData(Vector2Int position, BuildingData buildingData)
         {
