@@ -1,5 +1,4 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +9,8 @@ namespace Code.UI
         [SerializeField] private TextMeshProUGUI _nameText;
         [SerializeField] private TextMeshProUGUI _levelText;
         [SerializeField] private Button _buildButton;
-        [SerializeField] private Button _clearButton;
+        [SerializeField] private Button _demolishButton;
+        [SerializeField] private Button _upgradeButton;
         
         [SerializeField] private BuildPanel _buildPanel;
         
@@ -21,7 +21,7 @@ namespace Code.UI
             SystemLocator.I.PlayerController.CellSelected += OnCellSelected;
             SystemLocator.I.PlayerController.CellUnselected += OnCellUnselected;
             _buildButton.onClick.AddListener(OnBuildButton);
-            _clearButton.onClick.AddListener(OnClearButton);
+            _demolishButton.onClick.AddListener(OnDemolishButton);
         }
 
         private void Start()
@@ -34,7 +34,7 @@ namespace Code.UI
             SystemLocator.I.PlayerController.CellSelected -= OnCellSelected;
             SystemLocator.I.PlayerController.CellUnselected -= OnCellUnselected;
             _buildButton.onClick.RemoveListener(OnBuildButton);
-            _clearButton.onClick.RemoveListener(OnClearButton);
+            _demolishButton.onClick.RemoveListener(OnDemolishButton);
         }
 
         private void OnBuildButton()
@@ -50,9 +50,10 @@ namespace Code.UI
             Hide();
         }
 
-        private void OnClearButton()
+        private void OnDemolishButton()
         {
-            
+            SystemLocator.I.Map.DemolishBuilding(_currentCell);
+            UpdateDisplayValues(_currentCell);
         }
         
         private void OnCellSelected(Cell cell) => Display(cell);
@@ -78,6 +79,10 @@ namespace Code.UI
             _levelText.text = cellHasBuilding
                 ? $"Level: {buildingData.Level}"
                 : "";
+
+            _buildButton.interactable = SystemLocator.I.Map.CanBuild(cell);
+            _upgradeButton.interactable = SystemLocator.I.Map.CanBeUpgraded(cell);
+            _demolishButton.interactable = SystemLocator.I.Map.CanDemolish(cell);
         }
         
         private void Show()

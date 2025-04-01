@@ -23,6 +23,11 @@ namespace Code
     [Serializable]
     internal sealed class PlayerData
     {
+        public PlayerData()
+        {
+            
+        }
+        
         [field:NonSerialized] public bool IsDirty { get; private set; } 
         
         private List<CellData> _cells = new List<CellData>();
@@ -56,13 +61,30 @@ namespace Code
             
             for (int i = 0; i < _cells.Count; i++)
             {
-                if (_cells[i].Position == position) continue;
+                if (_cells[i].Position != position) continue;
 
                 _cells[i] = new CellData
                 {
                     Position = position,
                     HasBuilding = true,
                     Building = buildingData
+                };
+            }
+        }
+
+        public void RemoveBuildingData(Vector2Int position)
+        {
+            if (_cells.All(cell => cell.Position != position)) return;
+            
+            for (int i = 0; i < _cells.Count; i++)
+            {
+                if (_cells[i].Position != position) continue;
+
+                _cells[i] = new CellData
+                {
+                    Position = position,
+                    HasBuilding = false,
+                    Building = default
                 };
             }
         }

@@ -50,5 +50,10 @@ namespace Code
             _buildingView = Instantiate(prefab, _transform);
             _buildingView.transform.rotation = Quaternion.identity;
         }
+
+        public void DemolishBuildingView()
+        {
+            Destroy(_buildingView);
+        }
     }
 }
