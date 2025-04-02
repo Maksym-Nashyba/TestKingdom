@@ -47,7 +47,7 @@ namespace Code.UI
                 {
                     SystemLocator.I.Map.BuildBuilding(_currentCell, selectedOptionId);
                     Show();
-                });
+                }, Show);
             Hide();
         }
 

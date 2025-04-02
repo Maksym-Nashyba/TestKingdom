@@ -16,8 +16,6 @@ namespace Code.UI
             for (var i = 0; i < _resourceCounterUIs.Length; i++)
             {
                 _resourceCounterUIs[i] = Instantiate(SystemLocator.I.ContentLibrary.ResourceCounterUIPrefab, transform);
-                Sprite icon = SystemLocator.I.ContentLibrary.ResourceIcons[i];
-                _resourceCounterUIs[i].DisplayIcon(icon);
             }
         }
 
@@ -27,8 +25,11 @@ namespace Code.UI
 
             foreach (ResourceType resourceType in SystemLocator.I.GameData.Resources.Keys)
             {
-                int value = SystemLocator.I.GameData.Resources[resourceType];
-                _resourceCounterUIs[(int)resourceType].DisplayValue(value);
+                _resourceCounterUIs[(int)resourceType].Display(new ResourceCount()
+                {
+                    Count = SystemLocator.I.GameData.Resources[resourceType],
+                    Type = resourceType
+                });
             }
 
             _lastUpdateTime = Time.time;

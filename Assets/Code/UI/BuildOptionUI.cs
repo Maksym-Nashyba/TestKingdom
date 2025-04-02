@@ -11,6 +11,7 @@ namespace Code.UI
         [SerializeField] private TextMeshProUGUI _descriptionText;
         [SerializeField] private Image _icon;
         [SerializeField] private Button _button;
+        [SerializeField] private Transform _inputsPool;
 
         private Action _callback;
         
@@ -37,6 +38,12 @@ namespace Code.UI
             _nameText.text = building.DisplayName;
             _descriptionText.text = building.DisplayDescription;
             _icon.sprite = building.BuyMenuIcon;
+            
+            foreach (ResourceCount resourceCount in building.Levels[0].Cost)
+            {
+                ResourceCounterUI counterUI = Instantiate(SystemLocator.I.ContentLibrary.ResourceCounterUIPrefab, _inputsPool);
+                counterUI.Display(resourceCount);
+            }
         }
     }
 }

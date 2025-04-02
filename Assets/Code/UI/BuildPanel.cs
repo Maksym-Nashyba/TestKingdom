@@ -10,9 +10,9 @@ namespace Code.UI
         [SerializeField] private Transform _optionPool;
         [SerializeField] private Button _cancelButton;
         
+        private readonly List<BuildOptionUI> _optionUIs = new();
         private Action<string> _onOptionSelected;
         private Action _onCanceled;
-        private List<BuildOptionUI> _optionUIs = new();
 
         private void Awake()
         {
@@ -30,9 +30,10 @@ namespace Code.UI
             SystemLocator.I.PlayerController.CellUnselected -= OnCellUnselected;
         }
 
-        public void Display(string[] optionTypeIds, Action<string> onOptionSelected)
+        public void Display(string[] optionTypeIds, Action<string> onOptionSelected, Action onCanceled)
         {
             _onOptionSelected = onOptionSelected;
+            _onCanceled = onCanceled;
 
             foreach (string optionId in optionTypeIds)
             {
@@ -63,9 +64,10 @@ namespace Code.UI
         {
             if (_onCanceled == null) return;
             
+            Action temp = _onCanceled;
             Reset();
             Hide();
-            _onCanceled?.Invoke();
+            temp?.Invoke();
         }
 
         private void OnCellUnselected(Cell obj)

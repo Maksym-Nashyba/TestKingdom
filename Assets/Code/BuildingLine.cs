@@ -18,6 +18,7 @@ namespace Code
     {
         [field:SerializeField] public GameObject ViewPrefab { get; private set; }
         [field:SerializeField] public ProductionOrder[] ProductionOrders { get; private set; }
+        [field:SerializeField] public ResourceCount[] Cost { get; private set; }
     }
 
     [Serializable]

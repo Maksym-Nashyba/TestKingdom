@@ -9,28 +9,23 @@ namespace Code.UI
         [SerializeField] private Image _icon;
         [SerializeField] private TextMeshProUGUI _text;
 
-        public void DisplayIcon(Sprite icon)
+        public void Display(ResourceCount resourceCount)
         {
+            Sprite icon = SystemLocator.I.ContentLibrary.ResourceIcons[(int)resourceCount.Type];
             _icon.sprite = icon;
-        }
-
-        public void DisplayValue(int value)
-        {
-            string suffix = "";
             
-            if (value > 1000)
+            string suffix = "";
+            if (resourceCount.Count > 1000)
             {
-                value /= 1000;
+                resourceCount.Count /= 1000;
                 suffix = "K";
             }
-            
-            if (value > 1000)
+            if (resourceCount.Count > 1000)
             {
-                value /= 1000;
+                resourceCount.Count /= 1000;
                 suffix = "M";
             }
-            
-            _text.text = value + suffix;
+            _text.text = resourceCount.Count + suffix;
         }
     }
 }

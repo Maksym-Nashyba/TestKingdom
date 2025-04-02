@@ -14,6 +14,8 @@ namespace Code.UI
         [SerializeField] private GameObject _isSelectedPanel;
         [SerializeField] private GameObject _requiredLevelPanel;
         [SerializeField] private TextMeshProUGUI _requiredLevelText;
+        [SerializeField] private Transform _inputsPool;
+        [SerializeField] private Transform _outputsPool;
         
         private Action _callback;
         
@@ -42,6 +44,18 @@ namespace Code.UI
                 
             _nameText.text = order.DisplayName;
             _icon.sprite = order.DisplayIcon;
+
+            foreach (ResourceCount resourceCount in order.Inputs)
+            {
+                ResourceCounterUI counterUI = Instantiate(SystemLocator.I.ContentLibrary.ResourceCounterUIPrefab, _inputsPool);
+                counterUI.Display(resourceCount);
+            }
+            
+            foreach (ResourceCount resourceCount in order.Outputs)
+            {
+                ResourceCounterUI counterUI = Instantiate(SystemLocator.I.ContentLibrary.ResourceCounterUIPrefab, _outputsPool);
+                counterUI.Display(resourceCount);
+            }
         }
 
         public void DisplayInsufficientLevel(int requiredLevel)
