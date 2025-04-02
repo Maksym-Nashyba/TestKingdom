@@ -1,16 +1,20 @@
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using Code;
 using UnityEngine;
 
-[RequireComponent(typeof(Grid))]
 internal sealed class Map : MonoBehaviour
 {
-    private Grid _grid;
-    private Cell[] _cells;
+    [SerializeField] private Cell[] _cells;
+    [SerializeField] private Grid _grid;
 
-    private void Awake()
+    private void Start()
     {
-        _grid = GetComponent<Grid>();
-        _cells = FindObjectsByType<Cell>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+#if UNITY_EDITOR
+        Cell[] foundCells = FindObjectsByType<Cell>(FindObjectsSortMode.None);
+        if (foundCells.Any(cell => !_cells.Contains(cell))) throw new InvalidDataException("Map's cells array does not contain all cells.");
+#endif
     }
 
     public Vector2Int GetPosition(Cell cell)
@@ -35,25 +39,45 @@ internal sealed class Map : MonoBehaviour
 
     public bool HasBuilding(Cell cell)
     {
-        return SystemLocator.I.PlayerData.GetBuildingData(GetPosition(cell), out _);
+        return SystemLocator.I.GameData.Cells[GetPosition(cell)].HasBuilding;
+    }
+
+    public bool GetBuildingData(Cell cell, out BuildingData buildingData)
+    {
+        Vector2Int position = GetPosition(cell);
+        CellData cellData = SystemLocator.I.GameData.Cells[position];
+        buildingData = cellData.Building;
+        return cellData.HasBuilding;
     }
 
     public void BuildBuilding(Cell cell, string buildingTypeId)
     {
-        BuildingData buildingData = new BuildingData
+        Vector2Int position = GetPosition(cell);
+        CellData cellData = SystemLocator.I.GameData.Cells[position];
+        cellData.HasBuilding = true;
+        cellData.Building = new BuildingData
         {
             Level = 1, 
             TypeId = buildingTypeId
         };
-        SystemLocator.I.PlayerData.SetBuildingData(GetPosition(cell), buildingData);
+        SystemLocator.I.GameData.Cells[position] = cellData;
         
-        cell.DisplayBuildingView(buildingData);
+        cell.DisplayBuildingView(cellData.Building);
     }
 
     public void DemolishBuilding(Cell cell)
     {
-        SystemLocator.I.PlayerData.RemoveBuildingData(GetPosition(cell));
+        Vector2Int position = GetPosition(cell);
+        CellData cellData = SystemLocator.I.GameData.Cells[position];
+        cellData.HasBuilding = false;
+        cellData.Building = default;
+        SystemLocator.I.GameData.Cells[position] = cellData;
         
         cell.DemolishBuildingView();
+    }
+
+    public IEnumerable<Vector2Int> GetPlayableCellPositions()
+    {
+        return _cells.Select(GetPosition);
     }
 }

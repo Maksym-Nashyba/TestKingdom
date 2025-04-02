@@ -69,8 +69,7 @@ namespace Code.UI
 
         private void UpdateDisplayValues(Cell cell)
         {
-            Vector2Int position = SystemLocator.I.Map.GetPosition(cell);
-            bool cellHasBuilding = SystemLocator.I.PlayerData.GetBuildingData(position, out BuildingData buildingData);
+            bool cellHasBuilding = SystemLocator.I.Map.GetBuildingData(cell, out BuildingData buildingData);
             
             _nameText.text = cellHasBuilding 
                 ? SystemLocator.I.ContentLibrary.GetBuilding(buildingData.TypeId).DisplayName

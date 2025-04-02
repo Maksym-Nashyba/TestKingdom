@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Code.UI
 {
@@ -12,7 +11,7 @@ namespace Code.UI
 
         private void Start()
         {
-            _resourceCounterUIs = new ResourceCounterUI[Enum.GetValues(typeof(ResourceType)).Length];
+            _resourceCounterUIs = new ResourceCounterUI[SystemLocator.I.GameData.Resources.Keys.Count];
             
             for (var i = 0; i < _resourceCounterUIs.Length; i++)
             {
@@ -26,10 +25,10 @@ namespace Code.UI
         {
             if (Time.time - _lastUpdateTime < _updateFrequencySeconds) return;
 
-            for (var i = 0; i < _resourceCounterUIs.Length; i++)
+            foreach (ResourceType resourceType in SystemLocator.I.GameData.Resources.Keys)
             {
-                int value = SystemLocator.I.PlayerData.GetResourceCount((ResourceType)i);
-                _resourceCounterUIs[i].DisplayValue(value);
+                int value = SystemLocator.I.GameData.Resources[resourceType];
+                _resourceCounterUIs[(int)resourceType].DisplayValue(value);
             }
 
             _lastUpdateTime = Time.time;
