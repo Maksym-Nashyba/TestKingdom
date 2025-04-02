@@ -11,6 +11,9 @@ namespace Code.UI
         [SerializeField] private TextMeshProUGUI _descriptionText;
         [SerializeField] private Image _icon;
         [SerializeField] private Button _button;
+        [SerializeField] private GameObject _isSelectedPanel;
+        [SerializeField] private GameObject _requiredLevelPanel;
+        [SerializeField] private TextMeshProUGUI _requiredLevelText;
         
         private Action _callback;
         
@@ -30,12 +33,22 @@ namespace Code.UI
             _callback = null;
         }
         
-        public void Display(ProductionOrder order, Action onSelected)
+        public void Display(ProductionOrder order, bool isSelected, Action onSelected)
         {
             _callback = onSelected;
             
+            _button.interactable = !isSelected;
+            _isSelectedPanel.SetActive(isSelected);
+                
             _nameText.text = order.DisplayName;
             _icon.sprite = order.DisplayIcon;
+        }
+
+        public void DisplayInsufficientLevel(int requiredLevel)
+        {
+            _requiredLevelPanel.SetActive(true);
+            _button.interactable = false;
+            _requiredLevelText.text = $"Level {requiredLevel} Required";
         }
     }
 }

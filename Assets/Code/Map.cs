@@ -66,10 +66,15 @@ internal sealed class Map : MonoBehaviour
         return SystemLocator.I.GameData.Cells[GetPosition(cell)].HasBuilding;
     }
 
-    public bool GetBuildingData(Cell cell, out BuildingData buildingData)
+    public CellData GetCellData(Cell cell)
     {
         Vector2Int position = GetPosition(cell);
-        CellData cellData = SystemLocator.I.GameData.Cells[position];
+        return SystemLocator.I.GameData.Cells[position];
+    }
+
+    public bool GetBuildingData(Cell cell, out BuildingData buildingData)
+    {
+        CellData cellData = GetCellData(cell);
         buildingData = cellData.Building;
         return cellData.HasBuilding;
     }

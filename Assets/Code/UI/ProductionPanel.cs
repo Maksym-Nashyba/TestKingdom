@@ -55,13 +55,21 @@ namespace Code.UI
         {
             Reset();
             
-            SystemLocator.I.Map.GetBuildingData(cell, out BuildingData buildingData);
-            IEnumerable<ProductionOrder> productionOrders = SystemLocator.I.ContentLibrary.EnumerateOrders(buildingData.TypeId);
-            foreach (ProductionOrder order in productionOrders)
+            CellData cellData = SystemLocator.I.Map.GetCellData(cell);
+            BuildingLine buildingLine = SystemLocator.I.ContentLibrary.GetBuilding(cellData.Building.TypeId);
+            for (var i = 0; i < buildingLine.Levels.Length; i++)
             {
-                ProductionOptionUI orderUI = Instantiate(SystemLocator.I.ContentLibrary.ProductionOptionUIPrefab, _optionHolder);
-                orderUI.Display(order, () => OnOptionSelected(order));
-                _optionUIs.Add(orderUI);
+                foreach (ProductionOrder order in buildingLine.Levels[i].ProductionOrders)
+                {
+                    ProductionOptionUI orderUI = Instantiate(SystemLocator.I.ContentLibrary.ProductionOptionUIPrefab, _optionHolder);
+
+                    bool isSelected = cellData.HasOrder && cellData.Order.TypeId == order.Id;
+                    orderUI.Display(order, isSelected, () => OnOptionSelected(order));
+                    
+                    if (i+1 > cellData.Building.Level) orderUI.DisplayInsufficientLevel(i+1);
+                    
+                    _optionUIs.Add(orderUI);
+                }
             }
         }
 

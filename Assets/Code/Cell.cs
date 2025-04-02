@@ -48,7 +48,7 @@ namespace Code
             BuildingLine buildingLine = SystemLocator.I.ContentLibrary.GetBuilding(buildingData.TypeId);
             GameObject prefab = buildingLine.Levels[buildingData.Level].ViewPrefab;
             _buildingView = Instantiate(prefab, _transform);
-            _buildingView.transform.rotation = Quaternion.identity;
+            _buildingView.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
         }
 
         public void DemolishBuildingView()

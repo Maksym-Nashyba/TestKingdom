@@ -22,8 +22,8 @@ MonoBehaviour:
   - <ViewPrefab>k__BackingField: {fileID: 8009035716571030837, guid: 2989b70ad1bd3d146963895a58f1718f,
       type: 3}
     <ProductionOrders>k__BackingField:
-    - Id: FarmL1Wheat
-      DisplayName: Homegrown Wheat
+    - Id: FarmL1Food
+      DisplayName: Manual Labour
       DisplayIcon: {fileID: 676391639, guid: 4ab0a59cd63005e40a3d825f960f9e5f, type: 3}
       DurationSeconds: 15
       Inputs: []
@@ -33,8 +33,8 @@ MonoBehaviour:
   - <ViewPrefab>k__BackingField: {fileID: 8009035716571030837, guid: ebe6ac07f616aea4ba855e4bba29b7b5,
       type: 3}
     <ProductionOrders>k__BackingField:
-    - Id: FarmL2Bananas
-      DisplayName: MonkeyBusiness
+    - Id: FarmL2Food
+      DisplayName: Using Tools
       DisplayIcon: {fileID: 676391639, guid: 4ab0a59cd63005e40a3d825f960f9e5f, type: 3}
       DurationSeconds: 10
       Inputs:
