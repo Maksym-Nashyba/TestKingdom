@@ -6,6 +6,8 @@ using UnityEngine;
 
 internal sealed class Map : MonoBehaviour
 {
+    public IEnumerable<Vector2Int> PlayablePositions { get; private set; }
+    
     [SerializeField] private Cell[] _cells;
     [SerializeField] private Grid _grid;
 
@@ -23,6 +25,8 @@ internal sealed class Map : MonoBehaviour
             Cell cell = _cells.First(c => GetPosition(c) == cellData.Key);
             cell.DisplayBuildingView(cellData.Value.Building);
         }
+
+        PlayablePositions ??= GetPlayableCellPositions();
     }
 
     public Vector2Int GetPosition(Cell cell)
@@ -86,6 +90,7 @@ internal sealed class Map : MonoBehaviour
 
     public IEnumerable<Vector2Int> GetPlayableCellPositions()
     {
-        return _cells.Select(GetPosition);
+        PlayablePositions = _cells.Select(GetPosition);
+        return PlayablePositions;
     }
 }

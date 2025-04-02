@@ -14,9 +14,17 @@ namespace Code
         [field: SerializeField] public ResourceCounterUI ResourceCounterUIPrefab {get; private set;}
         [field: SerializeField] public Sprite[] ResourceIcons { get; private set; } = new Sprite[Enum.GetValues(typeof(ResourceType)).Length];
 
-        public BuildingLine GetBuilding(string buildingDataId)
+        public BuildingLine GetBuilding(string buildingTypeId)
         {
-            return Buildings.First(building => building.Id == buildingDataId);
+            return Buildings.First(building => building.Id == buildingTypeId);
+        }
+        
+        public ProductionOrder GetOrder(string buildingTypeId, string orderTypeId)
+        {
+            BuildingLine building = GetBuilding(buildingTypeId);
+            return building.Levels
+                .SelectMany(level => level.ProductionOrders)
+                .First(order => order.Id == orderTypeId);
         }
     }
 }
