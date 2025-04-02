@@ -17,5 +17,17 @@ namespace Code
     public struct BuildingLevel
     {
         [field:SerializeField] public GameObject ViewPrefab { get; private set; }
+        [field:SerializeField] public ProductionOrder[] ProductionOrders { get; private set; }
+    }
+
+    [Serializable]
+    public struct ProductionOrder
+    {
+        public string Id;
+        public string DisplayName;
+        public Sprite DisplayIcon;
+        public float DurationSeconds;
+        public ResourceCount[] Inputs;
+        public ResourceCount[] Outputs;
     }
 }

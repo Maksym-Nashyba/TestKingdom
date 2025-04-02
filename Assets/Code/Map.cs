@@ -15,6 +15,14 @@ internal sealed class Map : MonoBehaviour
         Cell[] foundCells = FindObjectsByType<Cell>(FindObjectsSortMode.None);
         if (foundCells.Any(cell => !_cells.Contains(cell))) throw new InvalidDataException("Map's cells array does not contain all cells.");
 #endif
+
+        foreach (KeyValuePair<Vector2Int,CellData> cellData in SystemLocator.I.GameData.Cells)
+        {
+            if (!cellData.Value.HasBuilding) continue;
+            
+            Cell cell = _cells.First(c => GetPosition(c) == cellData.Key);
+            cell.DisplayBuildingView(cellData.Value.Building);
+        }
     }
 
     public Vector2Int GetPosition(Cell cell)

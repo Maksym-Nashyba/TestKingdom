@@ -41,6 +41,16 @@ namespace Code
             Resources.PropertyChanged += (_, _) => MarkDirty();
             Resources.CollectionChanged += (_, _) => MarkDirty();
             
+            Cells[new Vector2Int(0, 0)] = new CellData
+            {
+                HasBuilding = true,
+                Building = new BuildingData
+                {
+                    TypeId = "Castle",
+                    Level = 1
+                }
+            };
+            
             MarkDirty();
         }
 
