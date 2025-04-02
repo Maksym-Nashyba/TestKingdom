@@ -21,13 +21,13 @@ namespace Code.UI
             if (value > 1000)
             {
                 value /= 1000;
-                suffix = " K";
+                suffix = "K";
             }
             
             if (value > 1000)
             {
                 value /= 1000;
-                suffix = " M";
+                suffix = "M";
             }
             
             _text.text = value + suffix;

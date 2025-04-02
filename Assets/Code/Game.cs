@@ -32,8 +32,9 @@ namespace Code
                 ProductionOrder order = SystemLocator.I.ContentLibrary.GetOrder(cellData.Building.TypeId, cellData.Order.TypeId); 
                 float secondsPassed = now.Subtract(cellData.Order.StartTime).Seconds;
                 if (secondsPassed < order.DurationSeconds) return;
-
+                
                 cellData.Order.StartTime = now.Subtract(TimeSpan.FromSeconds(secondsPassed%order.DurationSeconds));
+                GameData.Cells[position] = cellData;
                 
                 Spend(order.Inputs);
                 Aquire(order.Outputs);

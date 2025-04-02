@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,6 +7,8 @@ using UnityEngine;
 
 internal sealed class Map : MonoBehaviour
 {
+    public event Action<Cell> CellChanged; 
+    
     public IEnumerable<Vector2Int> PlayablePositions { get; private set; }
     
     [SerializeField] private Cell[] _cells;
@@ -41,12 +44,21 @@ internal sealed class Map : MonoBehaviour
 
     public bool CanDemolish(Cell cell)
     {
-        return HasBuilding(cell);
+        if (!GetBuildingData(cell, out BuildingData buildingData)) return false;
+        if (buildingData.TypeId == "Castle") return false;
+        return true;
     }
 
     public bool CanBeUpgraded(Cell cell)
     {
         return HasBuilding(cell);
+    }
+
+    public bool CanProduce(Cell cell)
+    {
+        if (!GetBuildingData(cell, out BuildingData buildingData)) return false;
+        if (buildingData.TypeId == "Castle") return false;
+        return true;
     }
 
     public bool HasBuilding(Cell cell)
@@ -75,22 +87,50 @@ internal sealed class Map : MonoBehaviour
         SystemLocator.I.GameData.Cells[position] = cellData;
         
         cell.DisplayBuildingView(cellData.Building);
+        CellChanged?.Invoke(cell);
     }
 
     public void DemolishBuilding(Cell cell)
     {
         Vector2Int position = GetPosition(cell);
         CellData cellData = SystemLocator.I.GameData.Cells[position];
+        cellData.HasOrder = false;
+        cellData.Order = default;
         cellData.HasBuilding = false;
         cellData.Building = default;
         SystemLocator.I.GameData.Cells[position] = cellData;
         
         cell.DemolishBuildingView();
+        CellChanged?.Invoke(cell);
     }
 
     public IEnumerable<Vector2Int> GetPlayableCellPositions()
     {
         PlayablePositions = _cells.Select(GetPosition);
         return PlayablePositions;
+    }
+
+    public void StartProductionOrder(Cell cell, ProductionOrder order)
+    {
+        Vector2Int position = GetPosition(cell);
+        CellData cellData = SystemLocator.I.GameData.Cells[position];
+        cellData.HasOrder = true;
+        cellData.Order = new OrderData
+        {
+            StartTime = DateTime.Now,
+            TypeId = order.Id,
+        };
+        SystemLocator.I.GameData.Cells[position] = cellData;
+        CellChanged?.Invoke(cell);
+    }
+
+    public void HaltProductionOrder(Cell cell)
+    {
+        Vector2Int position = GetPosition(cell);
+        CellData cellData = SystemLocator.I.GameData.Cells[position];
+        cellData.HasOrder = false;
+        cellData.Order = default;
+        SystemLocator.I.GameData.Cells[position] = cellData;
+        CellChanged?.Invoke(cell);
     }
 }

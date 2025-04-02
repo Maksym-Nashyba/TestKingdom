@@ -17,6 +17,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4f5f78d6d4d277e4dbdce7d34c985591, type: 2}
   <BuildOptionUIPrefab>k__BackingField: {fileID: 3146991575909774057, guid: 94f3a42d3062b134599f71900b06612e,
     type: 3}
+  <ProductionOptionUIPrefab>k__BackingField: {fileID: 5323379807132832662, guid: 0b82cfcd250ebe44db4113486d050cc0,
+    type: 3}
   <ResourceCounterUIPrefab>k__BackingField: {fileID: 2545971581307817977, guid: a58488e5eae687a4eb25e39d4f8359b5,
     type: 3}
   <ResourceIcons>k__BackingField:

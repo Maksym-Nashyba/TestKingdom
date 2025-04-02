@@ -20,6 +20,7 @@ namespace Code.UI
         {
             SystemLocator.I.PlayerController.CellSelected += OnCellSelected;
             SystemLocator.I.PlayerController.CellUnselected += OnCellUnselected;
+            SystemLocator.I.Map.CellChanged += OnCellChanged;
             _buildButton.onClick.AddListener(OnBuildButton);
             _demolishButton.onClick.AddListener(OnDemolishButton);
         }
@@ -33,6 +34,7 @@ namespace Code.UI
         {
             SystemLocator.I.PlayerController.CellSelected -= OnCellSelected;
             SystemLocator.I.PlayerController.CellUnselected -= OnCellUnselected;
+            SystemLocator.I.Map.CellChanged -= OnCellChanged;
             _buildButton.onClick.RemoveListener(OnBuildButton);
             _demolishButton.onClick.RemoveListener(OnDemolishButton);
         }
@@ -44,7 +46,6 @@ namespace Code.UI
                 selectedOptionId =>
                 {
                     SystemLocator.I.Map.BuildBuilding(_currentCell, selectedOptionId);
-                    UpdateDisplayValues(_currentCell);
                     Show();
                 });
             Hide();
@@ -53,21 +54,26 @@ namespace Code.UI
         private void OnDemolishButton()
         {
             SystemLocator.I.Map.DemolishBuilding(_currentCell);
-            UpdateDisplayValues(_currentCell);
+            UpdatePanel(_currentCell);
         }
-        
-        private void OnCellSelected(Cell cell) => Display(cell);
 
-        private void OnCellUnselected(Cell cell) => Hide();
-        
-        private void Display(Cell cell)
+        private void OnCellSelected(Cell cell)
         {
             _currentCell = cell;
-            UpdateDisplayValues(cell);
+            UpdatePanel(cell);
             Show();
         }
 
-        private void UpdateDisplayValues(Cell cell)
+        private void OnCellUnselected(Cell cell) => Hide();
+
+        private void OnCellChanged(Cell cell)
+        {
+            if (_currentCell != cell) return;
+            
+            UpdatePanel(cell);
+        }
+
+        private void UpdatePanel(Cell cell)
         {
             bool cellHasBuilding = SystemLocator.I.Map.GetBuildingData(cell, out BuildingData buildingData);
             

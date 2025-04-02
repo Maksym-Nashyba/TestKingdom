@@ -33,7 +33,7 @@ namespace Code
     [Serializable]
     internal sealed class GameData : IDisposable
     {
-        [field:NonSerialized] public bool IsDirty { get; private set; } 
+        [field:NonSerialized] public bool IsDirty { get; private set; }
         
         public readonly ObservableDictionary<Vector2Int, CellData> Cells;  //All data mush be of value types to ensure 
         public readonly ObservableDictionary<ResourceType, int> Resources; //that CollectionChanged events are emitted correctly
