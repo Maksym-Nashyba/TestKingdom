@@ -29,9 +29,12 @@ namespace Code
                 CellData cellData = GameData.Cells[position];
                 if (!cellData.HasOrder) continue;
 
-                ProductionOrder order = SystemLocator.I.ContentLibrary.GetOrder(cellData.Building.TypeId, cellData.Order.TypeId); 
-                float secondsPassed = now.Subtract(cellData.Order.StartTime).Seconds;
-                if (secondsPassed < order.DurationSeconds) return;
+                ProductionOrder order = SystemLocator.I.ContentLibrary.GetOrder(cellData.Building.TypeId, cellData.Order.TypeId);
+                
+                TimeSpan timePassed = now.Subtract(cellData.Order.StartTime);
+                float secondsPassed = timePassed.Seconds + timePassed.Milliseconds/1000f;
+                SystemLocator.I.Map.SetProductionProgressView(position, secondsPassed/order.DurationSeconds);
+                if (secondsPassed < order.DurationSeconds) continue;
                 
                 cellData.Order.StartTime = now.Subtract(TimeSpan.FromSeconds(secondsPassed%order.DurationSeconds));
                 GameData.Cells[position] = cellData;

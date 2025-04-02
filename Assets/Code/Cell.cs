@@ -7,6 +7,10 @@ namespace Code
     {
         [SerializeField] private float _hoverRiseHeight = 0.1f;
         [SerializeField] private float _hoverAnimationDuration = 0.2f;
+        [SerializeField] private MeshRenderer _progressRenderer;
+        
+        private static readonly int ValueNormalizedProperty = Shader.PropertyToID("_ValueNormalized");
+        private float _progress;
         
         private Transform _transform;
         private GameObject _buildingView;
@@ -34,8 +38,16 @@ namespace Code
                 _ => throw new ArgumentOutOfRangeException()
             };
             _transform.position = Vector3.Lerp(_transform.position, targetPosition, (1f/_hoverAnimationDuration) * Time.deltaTime);
+            
+            if (_progress > float.Epsilon) _progressRenderer.enabled = true;
+            _progressRenderer.material.SetFloat(ValueNormalizedProperty, _progress);
         }
 
+        public void SetProductionProgress(float progress)
+        {
+            _progress = progress;
+        }
+        
         public void SetSelectionState(SelectionState selectionState)
         {
             _selectionState = selectionState;
@@ -50,7 +62,7 @@ namespace Code
             _buildingView = Instantiate(prefab, _transform);
             _buildingView.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
         }
-
+        
         public void DemolishBuildingView()
         {
             Destroy(_buildingView);

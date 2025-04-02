@@ -50,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hoverRiseHeight: 0.25
   _hoverAnimationDuration: 0.1
+  _progressRenderer: {fileID: 6968305219071854590}
 --- !u!33 &1864664058633537706
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -138,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6960351083324479804
 Transform:
   m_ObjectHideFlags: 0
@@ -146,14 +147,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3605698470370403022}
-  m_LocalRotation: {x: 0.6830118, y: 0.18301266, z: -0.18301211, w: 0.6830139}
+  m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
   m_LocalPosition: {x: 0, y: 0.015, z: 0}
   m_LocalScale: {x: 2.4496, y: 2.4496, z: 2.4496}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 476699329711238550}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: -30}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 90}
 --- !u!33 &3169035029818811826
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -169,7 +170,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3605698470370403022}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

@@ -7,13 +7,15 @@ using UnityEngine;
 
 internal sealed class Map : MonoBehaviour
 {
-    public event Action<Cell> CellChanged; 
-    
-    public IEnumerable<Vector2Int> PlayablePositions { get; private set; }
+    public event Action<Cell> CellChanged;
+
+    public IEnumerable<Vector2Int> PlayablePositions => _positionCache.Values;
     
     [SerializeField] private Cell[] _cells;
     [SerializeField] private Grid _grid;
 
+    private Dictionary<Cell, Vector2Int> _positionCache;
+    
     private void Start()
     {
 #if UNITY_EDITOR
@@ -29,12 +31,17 @@ internal sealed class Map : MonoBehaviour
             cell.DisplayBuildingView(cellData.Value.Building);
         }
 
-        PlayablePositions ??= GetPlayableCellPositions();
+        if (_positionCache is null) GetPlayableCellPositions();
     }
 
     public Vector2Int GetPosition(Cell cell)
     {
-        return (Vector2Int)_grid.WorldToCell(cell.transform.position);
+        if (_positionCache is null || !_positionCache.TryGetValue(cell, out Vector2Int position))
+        {
+            Vector3Int rawPosition = _grid.WorldToCell(cell.transform.position);
+            return new Vector2Int(rawPosition.x, rawPosition.y);
+        }
+        return position;
     }
 
     public bool CanBuild(Cell cell)
@@ -78,7 +85,7 @@ internal sealed class Map : MonoBehaviour
         buildingData = cellData.Building;
         return cellData.HasBuilding;
     }
-
+    
     public void BuildBuilding(Cell cell, string buildingTypeId)
     {
         Vector2Int position = GetPosition(cell);
@@ -111,7 +118,7 @@ internal sealed class Map : MonoBehaviour
 
     public IEnumerable<Vector2Int> GetPlayableCellPositions()
     {
-        PlayablePositions = _cells.Select(GetPosition);
+        _positionCache = _cells.ToDictionary(x=> x, GetPosition);
         return PlayablePositions;
     }
 
@@ -129,6 +136,12 @@ internal sealed class Map : MonoBehaviour
         CellChanged?.Invoke(cell);
     }
 
+    public void SetProductionProgressView(Vector2Int position, float progress)
+    {
+        Cell cell = _positionCache.First(x => x.Value == position).Key;
+        cell.SetProductionProgress(progress);
+    }
+    
     public void HaltProductionOrder(Cell cell)
     {
         Vector2Int position = GetPosition(cell);
