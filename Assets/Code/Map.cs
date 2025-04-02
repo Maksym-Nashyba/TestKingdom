@@ -136,12 +136,6 @@ internal sealed class Map : MonoBehaviour
         CellChanged?.Invoke(cell);
     }
 
-    public void SetProductionProgressView(Vector2Int position, float progress)
-    {
-        Cell cell = _positionCache.First(x => x.Value == position).Key;
-        cell.SetProductionProgress(progress);
-    }
-    
     public void HaltProductionOrder(Cell cell)
     {
         Vector2Int position = GetPosition(cell);
@@ -150,5 +144,17 @@ internal sealed class Map : MonoBehaviour
         cellData.Order = default;
         SystemLocator.I.GameData.Cells[position] = cellData;
         CellChanged?.Invoke(cell);
+    }
+
+    public void SetProductionProgressView(Vector2Int position, float progress)
+    {
+        Cell cell = _positionCache.First(x => x.Value == position).Key;
+        cell.SetProductionProgress(progress);
+    }
+
+    public void DisplayOrderDone(Vector2Int position, ProductionOrder order)
+    {
+        Cell cell = _positionCache.First(x => x.Value == position).Key;
+        cell.DisplayOrderDone(order);
     }
 }

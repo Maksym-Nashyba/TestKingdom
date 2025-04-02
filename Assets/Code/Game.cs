@@ -35,6 +35,7 @@ namespace Code
                 float secondsPassed = timePassed.Seconds + timePassed.Milliseconds/1000f;
                 SystemLocator.I.Map.SetProductionProgressView(position, secondsPassed/order.DurationSeconds);
                 if (secondsPassed < order.DurationSeconds) continue;
+                SystemLocator.I.Map.DisplayOrderDone(position, order);
                 
                 cellData.Order.StartTime = now.Subtract(TimeSpan.FromSeconds(secondsPassed%order.DurationSeconds));
                 GameData.Cells[position] = cellData;

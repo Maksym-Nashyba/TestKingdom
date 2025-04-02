@@ -1,4 +1,5 @@
 ﻿using System;
+using Code.Visualization;
 using UnityEngine;
 
 namespace Code
@@ -66,6 +67,15 @@ namespace Code
         public void DemolishBuildingView()
         {
             Destroy(_buildingView);
+        }
+
+        public void DisplayOrderDone(ProductionOrder order)
+        {
+            foreach (ResourceCount resourceCount in order.Outputs)
+            {
+                OrderDoneEffect effect = Instantiate(SystemLocator.I.ContentLibrary.OrderDoneEffectPrefab);
+                effect.SetUp(_transform.position + Vector3.up, resourceCount);
+            }
         }
     }
 }

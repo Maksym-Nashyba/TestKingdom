@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Code.UI;
+using Code.Visualization;
 using UnityEngine;
 
 namespace Code
@@ -14,8 +15,9 @@ namespace Code
         [field: SerializeField] public BuildOptionUI BuildOptionUIPrefab {get; private set;}
         [field: SerializeField] public ProductionOptionUI ProductionOptionUIPrefab {get; private set;}
         [field: SerializeField] public ResourceCounterUI ResourceCounterUIPrefab {get; private set;}
+        [field: SerializeField] public OrderDoneEffect OrderDoneEffectPrefab {get; private set;}
         [field: SerializeField] public Sprite[] ResourceIcons { get; private set; } = new Sprite[Enum.GetValues(typeof(ResourceType)).Length];
-
+        
         public BuildingLine GetBuilding(string buildingTypeId)
         {
             return Buildings.First(building => building.Id == buildingTypeId);

@@ -21,6 +21,8 @@ MonoBehaviour:
     type: 3}
   <ResourceCounterUIPrefab>k__BackingField: {fileID: 2545971581307817977, guid: a58488e5eae687a4eb25e39d4f8359b5,
     type: 3}
+  <OrderDoneEffectPrefab>k__BackingField: {fileID: 2815981821672157439, guid: e8131387126ee0b4182cc3069cfd36fc,
+    type: 3}
   <ResourceIcons>k__BackingField:
   - {fileID: 676391639, guid: 4ab0a59cd63005e40a3d825f960f9e5f, type: 3}
   - {fileID: 193681713, guid: 4ab0a59cd63005e40a3d825f960f9e5f, type: 3}
