@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Farm
   m_EditorClassIdentifier: 
   <Id>k__BackingField: Farm
+  <CanBeBuilt>k__BackingField: 1
   <DisplayName>k__BackingField: Farm
   <DisplayDescription>k__BackingField: Some fancy description for a farm building.
     Really creative too.

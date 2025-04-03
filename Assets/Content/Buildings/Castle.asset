@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Castle
   m_EditorClassIdentifier: 
   <Id>k__BackingField: Castle
+  <CanBeBuilt>k__BackingField: 0
   <DisplayName>k__BackingField: Castle
   <DisplayDescription>k__BackingField: 
   <BuyMenuIcon>k__BackingField: {fileID: -1138454826, guid: 4ab0a59cd63005e40a3d825f960f9e5f,
@@ -20,13 +21,16 @@ MonoBehaviour:
   <Levels>k__BackingField:
   - <ViewPrefab>k__BackingField: {fileID: 5060462672151488720, guid: be075cb8a5bfd7640a6053e6fd0c7139,
       type: 3}
+    <CastleLevelRequired>k__BackingField: 0
     <ProductionOrders>k__BackingField: []
     <Cost>k__BackingField: []
   - <ViewPrefab>k__BackingField: {fileID: 6445607589307757461, guid: c6ceed15390c9ec4998b235fb34df195,
       type: 3}
+    <CastleLevelRequired>k__BackingField: 0
     <ProductionOrders>k__BackingField: []
     <Cost>k__BackingField: []
   - <ViewPrefab>k__BackingField: {fileID: 7239235713693643621, guid: eef6aa2111268ae41a724d535aa34526,
       type: 3}
+    <CastleLevelRequired>k__BackingField: 0
     <ProductionOrders>k__BackingField: []
     <Cost>k__BackingField: []

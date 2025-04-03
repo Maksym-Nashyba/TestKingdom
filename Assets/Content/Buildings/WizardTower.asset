@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93bdea96689b416680920e2844c6b45c, type: 3}
+  m_Name: WizardTower
+  m_EditorClassIdentifier: 
+  <Id>k__BackingField: WizardTower
+  <CanBeBuilt>k__BackingField: 1
+  <DisplayName>k__BackingField: Wizard Tower
+  <DisplayDescription>k__BackingField: 
+  <BuyMenuIcon>k__BackingField: {fileID: 2117201935, guid: 4ab0a59cd63005e40a3d825f960f9e5f,
+    type: 3}
+  <Levels>k__BackingField:
+  - <ViewPrefab>k__BackingField: {fileID: 5989654759359868790, guid: a97858560f3ef034b8873f8298eca7da,
+      type: 3}
+    <CastleLevelRequired>k__BackingField: 1
+    <ProductionOrders>k__BackingField: []
+    <Cost>k__BackingField: []
+  - <ViewPrefab>k__BackingField: {fileID: 5989654759359868790, guid: 3a3175eadecfa1d4cbec770406050ff8,
+      type: 3}
+    <CastleLevelRequired>k__BackingField: 2
+    <ProductionOrders>k__BackingField: []
+    <Cost>k__BackingField: []

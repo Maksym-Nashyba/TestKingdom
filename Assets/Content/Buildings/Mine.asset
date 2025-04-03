@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93bdea96689b416680920e2844c6b45c, type: 3}
+  m_Name: Mine
+  m_EditorClassIdentifier: 
+  <Id>k__BackingField: Mine
+  <CanBeBuilt>k__BackingField: 1
+  <DisplayName>k__BackingField: ' Mine'
+  <DisplayDescription>k__BackingField: The dwarves delved too greedily and too deep.
+    You know what they awoke in the darkness... shadow and flame.
+  <BuyMenuIcon>k__BackingField: {fileID: -402967519, guid: 4ab0a59cd63005e40a3d825f960f9e5f,
+    type: 3}
+  <Levels>k__BackingField:
+  - <ViewPrefab>k__BackingField: {fileID: 5989654759359868790, guid: 4eb81747faad00d4e908c577fc233183,
+      type: 3}
+    <CastleLevelRequired>k__BackingField: 0
+    <ProductionOrders>k__BackingField: []
+    <Cost>k__BackingField: []
+  - <ViewPrefab>k__BackingField: {fileID: 5989654759359868790, guid: 97767b46005bd7f43a1d3254ba89c023,
+      type: 3}
+    <CastleLevelRequired>k__BackingField: 1
+    <ProductionOrders>k__BackingField: []
+    <Cost>k__BackingField: []
+  - <ViewPrefab>k__BackingField: {fileID: 5989654759359868790, guid: bd0cbac50b6e8534e89acc71addac24a,
+      type: 3}
+    <CastleLevelRequired>k__BackingField: 2
+    <ProductionOrders>k__BackingField: []
+    <Cost>k__BackingField: []

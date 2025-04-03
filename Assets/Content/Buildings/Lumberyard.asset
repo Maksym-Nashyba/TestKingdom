@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93bdea96689b416680920e2844c6b45c, type: 3}
+  m_Name: Lumberyard
+  m_EditorClassIdentifier: 
+  <Id>k__BackingField: Lumberyard
+  <CanBeBuilt>k__BackingField: 1
+  <DisplayName>k__BackingField: Lumberyard
+  <DisplayDescription>k__BackingField: Totally sustainable and does not cause any
+    environmental problems!
+  <BuyMenuIcon>k__BackingField: {fileID: 82777341, guid: 4ab0a59cd63005e40a3d825f960f9e5f,
+    type: 3}
+  <Levels>k__BackingField:
+  - <ViewPrefab>k__BackingField: {fileID: 5989654759359868790, guid: 8b8b98ec2b46faa4ca0f0608240cdcb4,
+      type: 3}
+    <CastleLevelRequired>k__BackingField: 0
+    <ProductionOrders>k__BackingField:
+    - Id: WoodL1
+      DisplayName: Punch the trees
+      DisplayIcon: {fileID: 82777341, guid: 4ab0a59cd63005e40a3d825f960f9e5f, type: 3}
+      DurationSeconds: 20
+      Inputs:
+      - Type: 0
+        Count: 20
+      Outputs:
+      - Type: 1
+        Count: 5
+    <Cost>k__BackingField: []
+  - <ViewPrefab>k__BackingField: {fileID: 5989654759359868790, guid: ad5ca77c06185044db59f96b65a59161,
+      type: 3}
+    <CastleLevelRequired>k__BackingField: 1
+    <ProductionOrders>k__BackingField: []
+    <Cost>k__BackingField: []
+  - <ViewPrefab>k__BackingField: {fileID: 5989654759359868790, guid: 481ac02240c839b42b2d3d3653b0c323,
+      type: 3}
+    <CastleLevelRequired>k__BackingField: 2
+    <ProductionOrders>k__BackingField: []
+    <Cost>k__BackingField: []

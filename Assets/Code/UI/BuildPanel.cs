@@ -31,16 +31,15 @@ namespace Code.UI
             SystemLocator.I.PlayerController.CellUnselected -= OnCellUnselected;
         }
 
-        public void Display(string[] optionTypeIds, Action<string> onOptionSelected, Action onCanceled)
+        public void Display(IEnumerable<BuildingLine> options, Action<string> onOptionSelected, Action onCanceled)
         {
             _onOptionSelected = onOptionSelected;
             _onCanceled = onCanceled;
 
-            foreach (string optionId in optionTypeIds)
+            foreach (BuildingLine option in options)
             {
-                BuildingLine building = SystemLocator.I.ContentLibrary.GetBuilding(optionId);
                 BuildOptionUI optionUI = Instantiate(SystemLocator.I.ContentLibrary.BuildOptionUIPrefab, _optionPool);
-                optionUI.Display(building, () => OnOptionSelected(optionId));
+                optionUI.Display(option, () => OnOptionSelected(option.Id));
                 _optionUIs.Add(optionUI);
             }
             

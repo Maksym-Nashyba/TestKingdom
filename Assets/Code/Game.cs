@@ -34,7 +34,9 @@ namespace Code
                 TimeSpan timePassed = now.Subtract(cellData.Order.StartTime);
                 float secondsPassed = timePassed.Seconds + timePassed.Milliseconds/1000f;
                 SystemLocator.I.Map.SetProductionProgressView(position, secondsPassed/order.DurationSeconds);
-                if (secondsPassed < order.DurationSeconds) continue;
+                if (secondsPassed < order.DurationSeconds || !CanAfford(order.Inputs)) continue;
+                
+                
                 SystemLocator.I.Map.DisplayOrderDone(position, order);
                 
                 cellData.Order.StartTime = now.Subtract(TimeSpan.FromSeconds(secondsPassed%order.DurationSeconds));

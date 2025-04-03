@@ -39,10 +39,15 @@ namespace Code
         {
             if (_cellSelected)
             {
-                Vector3 targetPosition = _targetCell.transform.position + new Vector3(0f, _height*0.8f, -10f);
-                _transform.position = Vector3.Lerp(_transform.position, targetPosition, 0.5f);
+                Vector3 targetPosition = new Vector3(_targetCell.transform.position.x, 0f, _targetCell.transform.position.z) + new Vector3(0f, _height, -7f);
+                _transform.position = Vector3.Lerp(_transform.position, targetPosition, Time.deltaTime * 2f);
                 
                 if (Input.GetKeyDown(KeyCode.Escape)) ClearSelection();
+                if (Input.GetMouseButtonDown(1))
+                {
+                    ClearSelection();
+                    RestartDrag();
+                }
             }
             else
             {

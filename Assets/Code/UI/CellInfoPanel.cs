@@ -1,4 +1,5 @@
-﻿using Code.Visualization;
+﻿using System.Linq;
+using Code.Visualization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -50,7 +51,7 @@ namespace Code.UI
         private void OnBuildButton()
         {
             _buildPanel.Display(
-                new []{"Farm"},
+                SystemLocator.I.ContentLibrary.Buildings.Where(b => b.CanBeBuilt),
                 selectedOptionId =>
                 {
                     SystemLocator.I.Map.BuildBuilding(_currentCell, selectedOptionId);
