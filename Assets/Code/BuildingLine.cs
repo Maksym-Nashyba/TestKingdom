@@ -1,10 +1,11 @@
 ﻿using System;
+using Code.Visualization;
 using UnityEngine;
 
 namespace Code
 {
     [CreateAssetMenu(fileName = "Building", menuName = "ScriptableObjects/Building")]
-    public class BuildingLine : ScriptableObject
+    internal sealed class BuildingLine : ScriptableObject
     {
         [field:SerializeField] public string Id { get; private set; }
         [field:SerializeField] public string DisplayName { get; private set; }
@@ -14,15 +15,15 @@ namespace Code
     }
 
     [Serializable]
-    public struct BuildingLevel
+    internal struct BuildingLevel
     {
-        [field:SerializeField] public GameObject ViewPrefab { get; private set; }
+        [field:SerializeField] public BuildingView ViewPrefab { get; private set; }
         [field:SerializeField] public ProductionOrder[] ProductionOrders { get; private set; }
         [field:SerializeField] public ResourceCount[] Cost { get; private set; }
     }
 
     [Serializable]
-    public struct ProductionOrder
+    internal struct ProductionOrder
     {
         public string Id;
         public string DisplayName;

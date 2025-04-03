@@ -1,8 +1,7 @@
 ﻿using System;
-using Code.Visualization;
 using UnityEngine;
 
-namespace Code
+namespace Code.Visualization
 {
     internal sealed class Cell : MonoBehaviour
     {
@@ -14,7 +13,7 @@ namespace Code
         private float _progress;
         
         private Transform _transform;
-        private GameObject _buildingView;
+        private BuildingView _buildingView;
         
         private Vector3 _originalPosition;
         private SelectionState _selectionState;
@@ -59,14 +58,16 @@ namespace Code
             if (_buildingView != null) Destroy(_buildingView.gameObject);
             
             BuildingLine buildingLine = SystemLocator.I.ContentLibrary.GetBuilding(buildingData.TypeId);
-            GameObject prefab = buildingLine.Levels[buildingData.Level].ViewPrefab;
+            BuildingView prefab = buildingLine.Levels[buildingData.Level].ViewPrefab;
             _buildingView = Instantiate(prefab, _transform);
             _buildingView.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+            
+            _buildingView.PlayBuiltAnimation();
         }
         
         public void DemolishBuildingView()
         {
-            Destroy(_buildingView);
+            Destroy(_buildingView.gameObject);
             _progressRenderer.enabled = false;
             _progress = 0f;
         }

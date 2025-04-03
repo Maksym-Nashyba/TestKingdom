@@ -19,7 +19,7 @@ MonoBehaviour:
   <BuyMenuIcon>k__BackingField: {fileID: 676391639, guid: 4ab0a59cd63005e40a3d825f960f9e5f,
     type: 3}
   <Levels>k__BackingField:
-  - <ViewPrefab>k__BackingField: {fileID: 8009035716571030837, guid: 2989b70ad1bd3d146963895a58f1718f,
+  - <ViewPrefab>k__BackingField: {fileID: 5989654759359868790, guid: 2989b70ad1bd3d146963895a58f1718f,
       type: 3}
     <ProductionOrders>k__BackingField:
     - Id: FarmL1Food
@@ -35,7 +35,7 @@ MonoBehaviour:
       Count: 25
     - Type: 2
       Count: 5
-  - <ViewPrefab>k__BackingField: {fileID: 8009035716571030837, guid: ebe6ac07f616aea4ba855e4bba29b7b5,
+  - <ViewPrefab>k__BackingField: {fileID: 770793063606806132, guid: ebe6ac07f616aea4ba855e4bba29b7b5,
       type: 3}
     <ProductionOrders>k__BackingField:
     - Id: FarmL2Food
