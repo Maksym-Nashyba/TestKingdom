@@ -14,6 +14,9 @@ namespace Code.UI
         [SerializeField] private Button _upgradeButton;
         [SerializeField] private ResourceCounterUI[] _upradeResourceCounters;
         [SerializeField] private ResourceCounterUI[] _demolishResourceCounters;
+        [SerializeField] private GameObject _maxLevelPanel;
+        [SerializeField] private GameObject _castlePanel;
+        [SerializeField] private GameObject _castleLowPanel;
         
         [SerializeField] private BuildPanel _buildPanel;
         
@@ -25,6 +28,7 @@ namespace Code.UI
             SystemLocator.I.PlayerController.CellUnselected += OnCellUnselected;
             SystemLocator.I.Map.CellChanged += OnCellChanged;
             _buildButton.onClick.AddListener(OnBuildButton);
+            _upgradeButton.onClick.AddListener(OnUpgradeButton);
             _demolishButton.onClick.AddListener(OnDemolishButton);
         }
 
@@ -39,6 +43,7 @@ namespace Code.UI
             SystemLocator.I.PlayerController.CellUnselected -= OnCellUnselected;
             SystemLocator.I.Map.CellChanged -= OnCellChanged;
             _buildButton.onClick.RemoveListener(OnBuildButton);
+            _upgradeButton.onClick.RemoveListener(OnUpgradeButton);
             _demolishButton.onClick.RemoveListener(OnDemolishButton);
         }
 
@@ -54,10 +59,14 @@ namespace Code.UI
             Hide();
         }
 
+        private void OnUpgradeButton()
+        {
+            SystemLocator.I.Map.UpgradeBuilding(_currentCell);
+        }
+
         private void OnDemolishButton()
         {
             SystemLocator.I.Map.DemolishBuilding(_currentCell);
-            UpdatePanel(_currentCell);
         }
 
         private void OnCellSelected(Cell cell)
@@ -72,7 +81,6 @@ namespace Code.UI
         private void OnCellChanged(Cell cell)
         {
             if (_currentCell != cell) return;
-            
             UpdatePanel(cell);
         }
 
@@ -89,8 +97,15 @@ namespace Code.UI
                 : "";
 
             _buildButton.interactable = SystemLocator.I.Map.CanBuild(cell);
-            _upgradeButton.interactable = SystemLocator.I.Map.CanBeUpgraded(cell);
-            _demolishButton.interactable = SystemLocator.I.Map.CanDemolish(cell);
+            
+            Map.CanUpgradeResult canUpgrade = SystemLocator.I.Map.CanUpgrade(cell);
+            _upgradeButton.interactable = canUpgrade == Map.CanUpgradeResult.Ok;
+            _maxLevelPanel.SetActive(canUpgrade == Map.CanUpgradeResult.MaxLevel);
+            _castleLowPanel.SetActive(canUpgrade == Map.CanUpgradeResult.CastleTooLow);
+            
+            Map.CanDemolishResult canDemolish = SystemLocator.I.Map.CanDemolish(cell);
+            _demolishButton.interactable = canDemolish == Map.CanDemolishResult.Ok;
+            _castlePanel.SetActive(canDemolish == Map.CanDemolishResult.Castle);
 
             foreach (ResourceCounterUI counter in _demolishResourceCounters) counter.gameObject.SetActive(false);
             foreach (ResourceCounterUI counter in _upradeResourceCounters) counter.gameObject.SetActive(false);

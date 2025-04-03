@@ -80,5 +80,11 @@ namespace Code.Visualization
                 effect.SetUp(_transform.position + Vector3.up, resourceCount);
             }
         }
+
+        public void DisplayUpgrade(BuildingData buildingData)
+        {
+            DemolishBuildingView();
+            DisplayBuildingView(buildingData);
+        }
     }
 }

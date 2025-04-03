@@ -18,6 +18,7 @@ namespace Code
     internal struct BuildingLevel
     {
         [field:SerializeField] public BuildingView ViewPrefab { get; private set; }
+        [field:SerializeField] public int CastleLevelRequired { get; private set; }
         [field:SerializeField] public ProductionOrder[] ProductionOrders { get; private set; }
         [field:SerializeField] public ResourceCount[] Cost { get; private set; }
     }

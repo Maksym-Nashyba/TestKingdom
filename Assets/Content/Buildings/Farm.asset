@@ -21,6 +21,7 @@ MonoBehaviour:
   <Levels>k__BackingField:
   - <ViewPrefab>k__BackingField: {fileID: 5989654759359868790, guid: 2989b70ad1bd3d146963895a58f1718f,
       type: 3}
+    <CastleLevelRequired>k__BackingField: 0
     <ProductionOrders>k__BackingField:
     - Id: FarmL1Food
       DisplayName: Manual Labour
@@ -37,6 +38,7 @@ MonoBehaviour:
       Count: 5
   - <ViewPrefab>k__BackingField: {fileID: 770793063606806132, guid: ebe6ac07f616aea4ba855e4bba29b7b5,
       type: 3}
+    <CastleLevelRequired>k__BackingField: 1
     <ProductionOrders>k__BackingField:
     - Id: FarmL2Food
       DisplayName: Using Tools

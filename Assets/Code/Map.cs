@@ -50,16 +50,30 @@ internal sealed class Map : MonoBehaviour
         return !HasBuilding(cell);
     }
 
-    public bool CanDemolish(Cell cell)
+    public CanDemolishResult CanDemolish(Cell cell)
     {
-        if (!GetBuildingData(cell, out BuildingData buildingData)) return false;
-        if (buildingData.TypeId == "Castle") return false;
-        return true;
+        if (!GetBuildingData(cell, out BuildingData buildingData)) return CanDemolishResult.NoBuilding;
+        if (buildingData.TypeId == "Castle") return CanDemolishResult.Castle;
+        return CanDemolishResult.Ok;
     }
 
-    public bool CanBeUpgraded(Cell cell)
+    public CanUpgradeResult CanUpgrade(Cell cell)
     {
-        return HasBuilding(cell);
+        if (!HasBuilding(cell)) return CanUpgradeResult.NoBuilding;
+        
+        Vector2Int position = GetPosition(cell);
+        CellData cellData = SystemLocator.I.GameData.Cells[position];
+        
+        BuildingLine buildingLine = SystemLocator.I.ContentLibrary.GetBuilding(cellData.Building.TypeId);
+        if (buildingLine.Levels.Length <= cellData.Building.Level+1) return CanUpgradeResult.MaxLevel;
+
+        int requiredCastleLevel = buildingLine.Levels[cellData.Building.Level + 1].CastleLevelRequired;
+        if (GetCastleData().Building.Level < requiredCastleLevel) return CanUpgradeResult.CastleTooLow;
+        
+        ResourceCount[] cost = buildingLine.Levels[cellData.Building.Level+1].Cost;
+        if (!SystemLocator.I.Game.CanAfford(cost)) return CanUpgradeResult.InsufficientResources;
+
+        return CanUpgradeResult.Ok;
     }
 
     public bool CanProduce(Cell cell)
@@ -86,18 +100,11 @@ internal sealed class Map : MonoBehaviour
         buildingData = cellData.Building;
         return cellData.HasBuilding;
     }
-    
+
     public void BuildBuilding(Cell cell, string buildingTypeId)
     {
         BuildingLine buildingLine = SystemLocator.I.ContentLibrary.GetBuilding(buildingTypeId);
         ResourceCount[] cost = buildingLine.Levels[0].Cost;
-        if (!SystemLocator.I.Game.CanAfford(cost))
-        {
-#if UNITY_EDITOR
-            Debug.LogError("Tried to build with insufficient resources!");
-#endif
-            return;
-        }
         
         Vector2Int position = GetPosition(cell);
         CellData cellData = SystemLocator.I.GameData.Cells[position];
@@ -114,8 +121,41 @@ internal sealed class Map : MonoBehaviour
         CellChanged?.Invoke(cell);
     }
 
+    public void UpgradeBuilding(Cell cell)
+    {
+        CanUpgradeResult canUpgrade = CanUpgrade(cell);
+        if (canUpgrade != CanUpgradeResult.Ok)
+        {
+#if UNITY_EDITOR
+            Debug.LogError($"Can't upgrade {canUpgrade}");
+#endif
+            return;
+        }
+        
+        Vector2Int position = GetPosition(cell);
+        CellData cellData = SystemLocator.I.GameData.Cells[position];
+        BuildingLine buildingLine = SystemLocator.I.ContentLibrary.GetBuilding(cellData.Building.TypeId);
+        ResourceCount[] cost = buildingLine.Levels[cellData.Building.Level+1].Cost;
+        
+        SystemLocator.I.Game.Spend(cost);
+        cellData.Building.Level++;
+        SystemLocator.I.GameData.Cells[position] = cellData;
+        
+        cell.DisplayUpgrade(cellData.Building);
+        CellChanged?.Invoke(cell);
+    }
+
     public void DemolishBuilding(Cell cell)
     {
+        CanDemolishResult canDemolish = CanDemolish(cell);
+        if (canDemolish != CanDemolishResult.Ok)
+        {
+#if UNITY_EDITOR
+            Debug.LogError($"Can't demolish {canDemolish}");
+#endif
+            return;
+        }
+        
         Vector2Int position = GetPosition(cell);
         CellData cellData = SystemLocator.I.GameData.Cells[position];
         
@@ -152,16 +192,6 @@ internal sealed class Map : MonoBehaviour
         CellChanged?.Invoke(cell);
     }
 
-    public void HaltProductionOrder(Cell cell)
-    {
-        Vector2Int position = GetPosition(cell);
-        CellData cellData = SystemLocator.I.GameData.Cells[position];
-        cellData.HasOrder = false;
-        cellData.Order = default;
-        SystemLocator.I.GameData.Cells[position] = cellData;
-        CellChanged?.Invoke(cell);
-    }
-
     public void SetProductionProgressView(Vector2Int position, float progress)
     {
         Cell cell = _positionCache.First(x => x.Value == position).Key;
@@ -172,5 +202,26 @@ internal sealed class Map : MonoBehaviour
     {
         Cell cell = _positionCache.First(x => x.Value == position).Key;
         cell.DisplayOrderDone(order);
+    }
+
+    public CellData GetCastleData()
+    {
+        return SystemLocator.I.GameData.Cells[new Vector2Int(0, 0)];
+    }
+    
+    public enum CanUpgradeResult
+    {
+        Ok,
+        NoBuilding,
+        InsufficientResources,
+        MaxLevel,
+        CastleTooLow
+    }
+    
+    public enum CanDemolishResult
+    {
+        Ok,
+        NoBuilding,
+        Castle
     }
 }

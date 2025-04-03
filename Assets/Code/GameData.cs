@@ -56,7 +56,7 @@ namespace Code
                 Building = new BuildingData
                 {
                     TypeId = "Castle",
-                    Level = 1
+                    Level = 0
                 }
             };
             
