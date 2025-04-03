@@ -88,6 +88,16 @@ internal sealed class Map : MonoBehaviour
     
     public void BuildBuilding(Cell cell, string buildingTypeId)
     {
+        BuildingLine buildingLine = SystemLocator.I.ContentLibrary.GetBuilding(buildingTypeId);
+        ResourceCount[] cost = buildingLine.Levels[0].Cost;
+        if (!SystemLocator.I.Game.CanAfford(cost))
+        {
+#if UNITY_EDITOR
+            Debug.LogError("Tried to build with insufficient resources!");
+#endif
+            return;
+        }
+        
         Vector2Int position = GetPosition(cell);
         CellData cellData = SystemLocator.I.GameData.Cells[position];
         cellData.HasBuilding = true;
@@ -97,6 +107,7 @@ internal sealed class Map : MonoBehaviour
             TypeId = buildingTypeId
         };
         SystemLocator.I.GameData.Cells[position] = cellData;
+        SystemLocator.I.Game.Spend(cost);
         
         cell.DisplayBuildingView(cellData.Building);
         CellChanged?.Invoke(cell);

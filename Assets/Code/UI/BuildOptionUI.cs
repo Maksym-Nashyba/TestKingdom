@@ -12,7 +12,9 @@ namespace Code.UI
         [SerializeField] private Image _icon;
         [SerializeField] private Button _button;
         [SerializeField] private Transform _inputsPool;
+        [SerializeField] private GameObject _insufficientResourcesPanel;
 
+        private BuildingLine _buildingLine;
         private Action _callback;
         
         private void Awake()
@@ -31,9 +33,18 @@ namespace Code.UI
             _callback = null;
         }
 
+        private void Update()
+        {
+            bool sufficientResources = SystemLocator.I.Game.CanAfford(_buildingLine.Levels[0].Cost);
+            
+            _insufficientResourcesPanel.SetActive(!sufficientResources);
+            _button.interactable = sufficientResources;
+        }
+        
         public void Display(BuildingLine building, Action onSelected)
         {
             _callback = onSelected;
+            _buildingLine = building;
             
             _nameText.text = building.DisplayName;
             _descriptionText.text = building.DisplayDescription;

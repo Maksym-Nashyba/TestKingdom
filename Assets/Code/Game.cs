@@ -45,6 +45,18 @@ namespace Code
             }
         }
 
+        public bool CanAfford(params ResourceCount[] resourceCounts)
+        {
+            for (int i = 0; i < resourceCounts.Length; i++)
+            {
+                if (GameData.Resources[resourceCounts[i].Type] < resourceCounts[i].Count)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        
         public void Spend(params ResourceCount[] resourceCounts)
         {
             for (int i = 0; i < resourceCounts.Length; i++)
