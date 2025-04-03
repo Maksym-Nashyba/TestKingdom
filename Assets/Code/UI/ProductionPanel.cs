@@ -66,7 +66,7 @@ namespace Code.UI
                     bool isSelected = cellData.HasOrder && cellData.Order.TypeId == order.Id;
                     orderUI.Display(order, isSelected, () => OnOptionSelected(order));
                     
-                    if (i+1 > cellData.Building.Level) orderUI.DisplayInsufficientLevel(i+1);
+                    if (i > cellData.Building.Level) orderUI.DisplayInsufficientLevel(i+1);
                     
                     _optionUIs.Add(orderUI);
                 }

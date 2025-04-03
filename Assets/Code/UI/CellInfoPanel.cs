@@ -11,6 +11,8 @@ namespace Code.UI
         [SerializeField] private Button _buildButton;
         [SerializeField] private Button _demolishButton;
         [SerializeField] private Button _upgradeButton;
+        [SerializeField] private ResourceCounterUI[] _upradeResourceCounters;
+        [SerializeField] private ResourceCounterUI[] _demolishResourceCounters;
         
         [SerializeField] private BuildPanel _buildPanel;
         
@@ -82,12 +84,34 @@ namespace Code.UI
                 : "Empty Cell";
 
             _levelText.text = cellHasBuilding
-                ? $"Level: {buildingData.Level}"
+                ? $"Level: {buildingData.Level+1}"
                 : "";
 
             _buildButton.interactable = SystemLocator.I.Map.CanBuild(cell);
             _upgradeButton.interactable = SystemLocator.I.Map.CanBeUpgraded(cell);
             _demolishButton.interactable = SystemLocator.I.Map.CanDemolish(cell);
+
+            foreach (ResourceCounterUI counter in _demolishResourceCounters) counter.gameObject.SetActive(false);
+            foreach (ResourceCounterUI counter in _upradeResourceCounters) counter.gameObject.SetActive(false);
+            
+            if (!cellHasBuilding) return;
+            
+            BuildingLine buildingLine = SystemLocator.I.ContentLibrary.GetBuilding(buildingData.TypeId);
+
+            for (var i = 0; i < Mathf.Min(_demolishResourceCounters.Length, buildingLine.Levels[buildingData.Level].Cost.Length); i++)
+            {
+                _demolishResourceCounters[i].gameObject.SetActive(true);
+                _demolishResourceCounters[i].Display(buildingLine.Levels[buildingData.Level].Cost[i]);
+            }
+
+            if (buildingLine.Levels.Length >= buildingData.Level + 2)
+            {
+                for (var i = 0; i < Mathf.Min(_upradeResourceCounters.Length, buildingLine.Levels[buildingData.Level+1].Cost.Length); i++)
+                {
+                    _upradeResourceCounters[i].gameObject.SetActive(true);
+                    _upradeResourceCounters[i].Display(buildingLine.Levels[buildingData.Level+1].Cost[i]);
+                }
+            }
         }
         
         private void Show()

@@ -67,6 +67,8 @@ namespace Code
         public void DemolishBuildingView()
         {
             Destroy(_buildingView);
+            _progressRenderer.enabled = false;
+            _progress = 0f;
         }
 
         public void DisplayOrderDone(ProductionOrder order)

@@ -103,7 +103,7 @@ internal sealed class Map : MonoBehaviour
         cellData.HasBuilding = true;
         cellData.Building = new BuildingData
         {
-            Level = 1, 
+            Level = 0, 
             TypeId = buildingTypeId
         };
         SystemLocator.I.GameData.Cells[position] = cellData;
@@ -117,6 +117,10 @@ internal sealed class Map : MonoBehaviour
     {
         Vector2Int position = GetPosition(cell);
         CellData cellData = SystemLocator.I.GameData.Cells[position];
+        
+        BuildingLine buildingLine = SystemLocator.I.ContentLibrary.GetBuilding(cellData.Building.TypeId);
+        SystemLocator.I.Game.Aquire(buildingLine.Levels[cellData.Building.Level].Cost);
+        
         cellData.HasOrder = false;
         cellData.Order = default;
         cellData.HasBuilding = false;
