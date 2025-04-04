@@ -16,7 +16,7 @@ namespace Code.UI
         {
             SystemLocator.I.PlayerController.CellSelected += OnCellSelected;
             SystemLocator.I.PlayerController.CellUnselected += OnCellUnselected;
-            SystemLocator.I.Map.CellChanged += OnCellChanged;
+            SystemLocator.I.Game.CellChanged += OnCellChanged;
         }
         
         private void Start() => Hide();
@@ -25,13 +25,13 @@ namespace Code.UI
         {
             SystemLocator.I.PlayerController.CellSelected -= OnCellSelected;
             SystemLocator.I.PlayerController.CellUnselected -= OnCellUnselected;
-            SystemLocator.I.Map.CellChanged -= OnCellChanged;
+            SystemLocator.I.Game.CellChanged -= OnCellChanged;
         }
 
         private void OnCellSelected(Cell cell)
         {
             _currentCell = cell;
-            if (!SystemLocator.I.Map.CanProduce(cell)) return;
+            if (!SystemLocator.I.Game.CanProduce(cell)) return;
             
             UpdatePanel(_currentCell);
             Show();
@@ -46,7 +46,7 @@ namespace Code.UI
         private void OnCellChanged(Cell cell)
         {
             if (cell != _currentCell) return;
-            if (!SystemLocator.I.Map.CanProduce(cell)) return;
+            if (!SystemLocator.I.Game.CanProduce(cell)) return;
             
             UpdatePanel(_currentCell);
             Show();
@@ -56,7 +56,7 @@ namespace Code.UI
         {
             Reset();
             
-            CellData cellData = SystemLocator.I.Map.GetCellData(cell);
+            CellData cellData = SystemLocator.I.Game.GetCellData(cell);
             BuildingLine buildingLine = SystemLocator.I.ContentLibrary.GetBuilding(cellData.Building.TypeId);
             for (var i = 0; i < buildingLine.Levels.Length; i++)
             {
@@ -85,7 +85,7 @@ namespace Code.UI
 
         private void OnOptionSelected(ProductionOrder order)
         {
-            SystemLocator.I.Map.StartProductionOrder(_currentCell, order);
+            SystemLocator.I.Game.StartProductionOrder(_currentCell, order);
             UpdatePanel(_currentCell);
         }
         

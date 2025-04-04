@@ -27,7 +27,7 @@ namespace Code.UI
         {
             SystemLocator.I.PlayerController.CellSelected += OnCellSelected;
             SystemLocator.I.PlayerController.CellUnselected += OnCellUnselected;
-            SystemLocator.I.Map.CellChanged += OnCellChanged;
+            SystemLocator.I.Game.CellChanged += OnCellChanged;
             _buildButton.onClick.AddListener(OnBuildButton);
             _upgradeButton.onClick.AddListener(OnUpgradeButton);
             _demolishButton.onClick.AddListener(OnDemolishButton);
@@ -42,7 +42,7 @@ namespace Code.UI
         {
             SystemLocator.I.PlayerController.CellSelected -= OnCellSelected;
             SystemLocator.I.PlayerController.CellUnselected -= OnCellUnselected;
-            SystemLocator.I.Map.CellChanged -= OnCellChanged;
+            SystemLocator.I.Game.CellChanged -= OnCellChanged;
             _buildButton.onClick.RemoveListener(OnBuildButton);
             _upgradeButton.onClick.RemoveListener(OnUpgradeButton);
             _demolishButton.onClick.RemoveListener(OnDemolishButton);
@@ -54,7 +54,7 @@ namespace Code.UI
                 SystemLocator.I.ContentLibrary.Buildings.Where(b => b.CanBeBuilt),
                 selectedOptionId =>
                 {
-                    SystemLocator.I.Map.BuildBuilding(_currentCell, selectedOptionId);
+                    SystemLocator.I.Game.BuildBuilding(_currentCell, selectedOptionId);
                     Show();
                 }, Show);
             Hide();
@@ -62,12 +62,12 @@ namespace Code.UI
 
         private void OnUpgradeButton()
         {
-            SystemLocator.I.Map.UpgradeBuilding(_currentCell);
+            SystemLocator.I.Game.UpgradeBuilding(_currentCell);
         }
 
         private void OnDemolishButton()
         {
-            SystemLocator.I.Map.DemolishBuilding(_currentCell);
+            SystemLocator.I.Game.DemolishBuilding(_currentCell);
         }
 
         private void OnCellSelected(Cell cell)
@@ -87,7 +87,7 @@ namespace Code.UI
 
         private void UpdatePanel(Cell cell)
         {
-            bool cellHasBuilding = SystemLocator.I.Map.GetBuildingData(cell, out BuildingData buildingData);
+            bool cellHasBuilding = SystemLocator.I.Game.GetBuildingData(cell, out BuildingData buildingData);
             
             _nameText.text = cellHasBuilding 
                 ? SystemLocator.I.ContentLibrary.GetBuilding(buildingData.TypeId).DisplayName
@@ -97,16 +97,16 @@ namespace Code.UI
                 ? $"Level: {buildingData.Level+1}"
                 : "";
 
-            _buildButton.interactable = SystemLocator.I.Map.CanBuild(cell);
+            _buildButton.interactable = SystemLocator.I.Game.CanBuild(cell);
             
-            Map.CanUpgradeResult canUpgrade = SystemLocator.I.Map.CanUpgrade(cell);
-            _upgradeButton.interactable = canUpgrade == Map.CanUpgradeResult.Ok;
-            _maxLevelPanel.SetActive(canUpgrade == Map.CanUpgradeResult.MaxLevel);
-            _castleLowPanel.SetActive(canUpgrade == Map.CanUpgradeResult.CastleTooLow);
+            Game.CanUpgradeResult canUpgrade = SystemLocator.I.Game.CanUpgrade(cell);
+            _upgradeButton.interactable = canUpgrade == Game.CanUpgradeResult.Ok;
+            _maxLevelPanel.SetActive(canUpgrade == Game.CanUpgradeResult.MaxLevel);
+            _castleLowPanel.SetActive(canUpgrade == Game.CanUpgradeResult.CastleTooLow);
             
-            Map.CanDemolishResult canDemolish = SystemLocator.I.Map.CanDemolish(cell);
-            _demolishButton.interactable = canDemolish == Map.CanDemolishResult.Ok;
-            _castlePanel.SetActive(canDemolish == Map.CanDemolishResult.Castle);
+            Game.CanDemolishResult canDemolish = SystemLocator.I.Game.CanDemolish(cell);
+            _demolishButton.interactable = canDemolish == Game.CanDemolishResult.Ok;
+            _castlePanel.SetActive(canDemolish == Game.CanDemolishResult.Castle);
 
             foreach (ResourceCounterUI counter in _demolishResourceCounters) counter.gameObject.SetActive(false);
             foreach (ResourceCounterUI counter in _upradeResourceCounters) counter.gameObject.SetActive(false);

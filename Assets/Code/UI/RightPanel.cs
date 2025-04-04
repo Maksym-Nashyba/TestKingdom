@@ -12,7 +12,7 @@ namespace Code.UI
         {
             SystemLocator.I.PlayerController.CellSelected += OnCellSelected;
             SystemLocator.I.PlayerController.CellUnselected += OnCellUnselected;
-            SystemLocator.I.Map.CellChanged += OnCellChanged;
+            SystemLocator.I.Game.CellChanged += OnCellChanged;
         }
         
         private void Start() => Hide();
@@ -21,12 +21,12 @@ namespace Code.UI
         {
             SystemLocator.I.PlayerController.CellSelected -= OnCellSelected;
             SystemLocator.I.PlayerController.CellUnselected -= OnCellUnselected;
-            SystemLocator.I.Map.CellChanged -= OnCellChanged;
+            SystemLocator.I.Game.CellChanged -= OnCellChanged;
         }
 
         private void OnCellSelected(Cell cell)
         {
-            if (!SystemLocator.I.Map.CanProduce(cell)) return;
+            if (!SystemLocator.I.Game.CanProduce(cell)) return;
             Show();
         }
 
@@ -37,7 +37,7 @@ namespace Code.UI
 
         private void OnCellChanged(Cell cell)
         {
-            if (!SystemLocator.I.Map.CanProduce(cell)) return;
+            if (!SystemLocator.I.Game.CanProduce(cell)) return;
             Show();
         }
         

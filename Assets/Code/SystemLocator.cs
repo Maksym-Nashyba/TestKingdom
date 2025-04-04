@@ -7,11 +7,11 @@ namespace Code
     {
         public static SystemLocator I { get; private set; }
 
-        public GameData GameData => Game.GameData; 
+        public GameData GameData => SaveSystem.GameData; 
         
-        [field:SerializeField] public Game Game { get; private set; }
+        [field:SerializeField] public SaveSystem SaveSystem { get; private set; }
         [field:SerializeField] public PlayerController PlayerController { get; private set; }
-        [field:SerializeField] public Map Map { get; private set; }
+        [field:SerializeField] public Game Game { get; private set; }
         [field:SerializeField] public ContentLibrary ContentLibrary { get; private set; }
 
         private void Awake()
