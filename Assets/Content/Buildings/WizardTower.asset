@@ -22,8 +22,24 @@ MonoBehaviour:
   - <ViewPrefab>k__BackingField: {fileID: 5989654759359868790, guid: a97858560f3ef034b8873f8298eca7da,
       type: 3}
     <CastleLevelRequired>k__BackingField: 1
-    <ProductionOrders>k__BackingField: []
-    <Cost>k__BackingField: []
+    <ProductionOrders>k__BackingField:
+    - Id: ManaL1
+      DisplayName: Liquid magic
+      DisplayIcon: {fileID: -1598204815, guid: 4ab0a59cd63005e40a3d825f960f9e5f, type: 3}
+      DurationSeconds: 45
+      Inputs:
+      - Type: 4
+        Count: 10
+      - Type: 5
+        Count: 25
+      Outputs:
+      - Type: 6
+        Count: 10
+    <Cost>k__BackingField:
+    - Type: 1
+      Count: 300
+    - Type: 2
+      Count: 125
   - <ViewPrefab>k__BackingField: {fileID: 5989654759359868790, guid: 3a3175eadecfa1d4cbec770406050ff8,
       type: 3}
     <CastleLevelRequired>k__BackingField: 2

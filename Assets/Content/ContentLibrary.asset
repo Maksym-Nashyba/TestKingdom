@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Buildings>k__BackingField:
   - {fileID: 11400000, guid: 1100e2edb228aca43b791ac4fa0209c9, type: 2}
-  - {fileID: 11400000, guid: 4f5f78d6d4d277e4dbdce7d34c985591, type: 2}
   - {fileID: 11400000, guid: 0cf9dbce3986ca04a8c8c22596e7badd, type: 2}
-  - {fileID: 11400000, guid: 96735ca333c504946991480cb73e90a2, type: 2}
+  - {fileID: 11400000, guid: 4f5f78d6d4d277e4dbdce7d34c985591, type: 2}
   - {fileID: 11400000, guid: f03a630db1572d44db9e2c2e493962ed, type: 2}
+  - {fileID: 11400000, guid: 96735ca333c504946991480cb73e90a2, type: 2}
   - {fileID: 11400000, guid: ee16c021c01e8d1429c32b42107b294a, type: 2}
+  - {fileID: 11400000, guid: 882b09be2de24fa4487e3d6b15c68852, type: 2}
+  - {fileID: 11400000, guid: 864758cf04586ed4bb79682d12ddf4df, type: 2}
   <BuildOptionUIPrefab>k__BackingField: {fileID: 3146991575909774057, guid: 94f3a42d3062b134599f71900b06612e,
     type: 3}
   <ProductionOptionUIPrefab>k__BackingField: {fileID: 5323379807132832662, guid: 0b82cfcd250ebe44db4113486d050cc0,
@@ -32,3 +34,7 @@ MonoBehaviour:
   - {fileID: 193681713, guid: 4ab0a59cd63005e40a3d825f960f9e5f, type: 3}
   - {fileID: 2138904259, guid: 4ab0a59cd63005e40a3d825f960f9e5f, type: 3}
   - {fileID: -402967519, guid: 4ab0a59cd63005e40a3d825f960f9e5f, type: 3}
+  - {fileID: -1926888797, guid: 4ab0a59cd63005e40a3d825f960f9e5f, type: 3}
+  - {fileID: 1948560314, guid: 4ab0a59cd63005e40a3d825f960f9e5f, type: 3}
+  - {fileID: -1598204815, guid: 4ab0a59cd63005e40a3d825f960f9e5f, type: 3}
+  - {fileID: -1145583254, guid: 4ab0a59cd63005e40a3d825f960f9e5f, type: 3}

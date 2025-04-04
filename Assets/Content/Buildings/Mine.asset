@@ -23,15 +23,77 @@ MonoBehaviour:
   - <ViewPrefab>k__BackingField: {fileID: 5989654759359868790, guid: 4eb81747faad00d4e908c577fc233183,
       type: 3}
     <CastleLevelRequired>k__BackingField: 0
-    <ProductionOrders>k__BackingField: []
-    <Cost>k__BackingField: []
+    <ProductionOrders>k__BackingField:
+    - Id: StoneL1
+      DisplayName: Wooden pickaxe
+      DisplayIcon: {fileID: 2138904259, guid: 4ab0a59cd63005e40a3d825f960f9e5f, type: 3}
+      DurationSeconds: 20
+      Inputs:
+      - Type: 0
+        Count: 25
+      - Type: 1
+        Count: 5
+      Outputs:
+      - Type: 2
+        Count: 20
+    <Cost>k__BackingField:
+    - Type: 0
+      Count: 35
+    - Type: 1
+      Count: 50
   - <ViewPrefab>k__BackingField: {fileID: 5989654759359868790, guid: 97767b46005bd7f43a1d3254ba89c023,
       type: 3}
     <CastleLevelRequired>k__BackingField: 1
-    <ProductionOrders>k__BackingField: []
-    <Cost>k__BackingField: []
+    <ProductionOrders>k__BackingField:
+    - Id: StoneL2
+      DisplayName: Branch mining
+      DisplayIcon: {fileID: 2138904259, guid: 4ab0a59cd63005e40a3d825f960f9e5f, type: 3}
+      DurationSeconds: 25
+      Inputs:
+      - Type: 0
+        Count: 20
+      - Type: 3
+        Count: 2
+      - Type: 4
+        Count: 5
+      Outputs:
+      - Type: 2
+        Count: 50
+    - Id: MetalL1
+      DisplayName: Smelting
+      DisplayIcon: {fileID: -402967519, guid: 4ab0a59cd63005e40a3d825f960f9e5f, type: 3}
+      DurationSeconds: 15
+      Inputs:
+      - Type: 1
+        Count: 10
+      - Type: 2
+        Count: 10
+      Outputs:
+      - Type: 3
+        Count: 5
+    <Cost>k__BackingField:
+    - Type: 1
+      Count: 25
+    - Type: 2
+      Count: 25
   - <ViewPrefab>k__BackingField: {fileID: 5989654759359868790, guid: bd0cbac50b6e8534e89acc71addac24a,
       type: 3}
     <CastleLevelRequired>k__BackingField: 2
-    <ProductionOrders>k__BackingField: []
-    <Cost>k__BackingField: []
+    <ProductionOrders>k__BackingField:
+    - Id: MetalL2
+      DisplayName: Advanced Metalurgy
+      DisplayIcon: {fileID: -402967519, guid: 4ab0a59cd63005e40a3d825f960f9e5f, type: 3}
+      DurationSeconds: 20
+      Inputs:
+      - Type: 1
+        Count: 35
+      - Type: 2
+        Count: 25
+      Outputs:
+      - Type: 3
+        Count: 15
+    <Cost>k__BackingField:
+    - Type: 1
+      Count: 30
+    - Type: 3
+      Count: 25

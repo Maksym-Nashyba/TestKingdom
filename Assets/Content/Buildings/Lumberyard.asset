@@ -27,21 +27,59 @@ MonoBehaviour:
     - Id: WoodL1
       DisplayName: Punch the trees
       DisplayIcon: {fileID: 82777341, guid: 4ab0a59cd63005e40a3d825f960f9e5f, type: 3}
+      DurationSeconds: 15
+      Inputs:
+      - Type: 0
+        Count: 15
+      Outputs:
+      - Type: 1
+        Count: 10
+    <Cost>k__BackingField:
+    - Type: 1
+      Count: 25
+    - Type: 2
+      Count: 10
+  - <ViewPrefab>k__BackingField: {fileID: 5989654759359868790, guid: ad5ca77c06185044db59f96b65a59161,
+      type: 3}
+    <CastleLevelRequired>k__BackingField: 1
+    <ProductionOrders>k__BackingField:
+    - Id: WoodL2
+      DisplayName: Use an axe
+      DisplayIcon: {fileID: 82777341, guid: 4ab0a59cd63005e40a3d825f960f9e5f, type: 3}
       DurationSeconds: 20
       Inputs:
       - Type: 0
         Count: 20
+      - Type: 3
+        Count: 5
       Outputs:
       - Type: 1
-        Count: 5
-    <Cost>k__BackingField: []
-  - <ViewPrefab>k__BackingField: {fileID: 5989654759359868790, guid: ad5ca77c06185044db59f96b65a59161,
-      type: 3}
-    <CastleLevelRequired>k__BackingField: 1
-    <ProductionOrders>k__BackingField: []
-    <Cost>k__BackingField: []
+        Count: 50
+    <Cost>k__BackingField:
+    - Type: 2
+      Count: 25
+    - Type: 3
+      Count: 10
   - <ViewPrefab>k__BackingField: {fileID: 5989654759359868790, guid: 481ac02240c839b42b2d3d3653b0c323,
       type: 3}
     <CastleLevelRequired>k__BackingField: 2
-    <ProductionOrders>k__BackingField: []
-    <Cost>k__BackingField: []
+    <ProductionOrders>k__BackingField:
+    - Id: WoodL3
+      DisplayName: Full deforestation
+      DisplayIcon: {fileID: 82777341, guid: 4ab0a59cd63005e40a3d825f960f9e5f, type: 3}
+      DurationSeconds: 20
+      Inputs:
+      - Type: 0
+        Count: 20
+      - Type: 3
+        Count: 5
+      - Type: 4
+        Count: 5
+      Outputs:
+      - Type: 1
+        Count: 75
+    <Cost>k__BackingField:
+    - Type: 2
+      Count: 35
+    - Type: 3
+      Count: 20

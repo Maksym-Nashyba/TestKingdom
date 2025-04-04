@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93bdea96689b416680920e2844c6b45c, type: 3}
+  m_Name: MissileSilo
+  m_EditorClassIdentifier: 
+  <Id>k__BackingField: Missile
+  <CanBeBuilt>k__BackingField: 1
+  <DisplayName>k__BackingField: Missile Silo
+  <DisplayDescription>k__BackingField: Ah the wonders of an unsupervised military
+    budget...
+  <BuyMenuIcon>k__BackingField: {fileID: -1237081580, guid: 4ab0a59cd63005e40a3d825f960f9e5f,
+    type: 3}
+  <Levels>k__BackingField:
+  - <ViewPrefab>k__BackingField: {fileID: 5989654759359868790, guid: ef459095ce85c3f4bb957b318769553b,
+      type: 3}
+    <CastleLevelRequired>k__BackingField: 2
+    <ProductionOrders>k__BackingField:
+    - Id: MissileL1
+      DisplayName: Launch it!
+      DisplayIcon: {fileID: -1237081580, guid: 4ab0a59cd63005e40a3d825f960f9e5f, type: 3}
+      DurationSeconds: 30
+      Inputs:
+      - Type: 6
+        Count: 100
+      Outputs: []
+    <Cost>k__BackingField:
+    - Type: 3
+      Count: 50
+    - Type: 6
+      Count: 25
+    - Type: 7
+      Count: 25

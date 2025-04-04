@@ -28,9 +28,17 @@ MonoBehaviour:
       type: 3}
     <CastleLevelRequired>k__BackingField: 0
     <ProductionOrders>k__BackingField: []
-    <Cost>k__BackingField: []
+    <Cost>k__BackingField:
+    - Type: 1
+      Count: 50
+    - Type: 2
+      Count: 25
   - <ViewPrefab>k__BackingField: {fileID: 7239235713693643621, guid: eef6aa2111268ae41a724d535aa34526,
       type: 3}
     <CastleLevelRequired>k__BackingField: 0
     <ProductionOrders>k__BackingField: []
-    <Cost>k__BackingField: []
+    <Cost>k__BackingField:
+    - Type: 2
+      Count: 100
+    - Type: 3
+      Count: 25

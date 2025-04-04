@@ -8,6 +8,10 @@ namespace Code
         Wood = 1,
         Stone = 2,
         Metal = 3,
+        Water = 4, 
+        Sugar = 5,
+        Mana = 6,
+        Crystal = 7,
     }
 
     [Serializable]
