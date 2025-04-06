@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace Code.Utils
 {
@@ -23,7 +24,7 @@ namespace Code.Utils
         INotifyPropertyChanged, IDictionary, IReadOnlyDictionary<TKey, TValue>,
         IDisposable
     {
-        private Dictionary<TKey, TValue> _dictionary;
+        [JsonProperty] private Dictionary<TKey, TValue> _dictionary;
 
         /// <summary>Initializes a new instance of the <see cref="ObservableDictionary{TKey, TValue}"/> class. </summary>
         public ObservableDictionary()

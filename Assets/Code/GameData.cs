@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using Code.Utils;
+using Newtonsoft.Json;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Code
 {
     [Serializable]
-    struct CellData
+    public struct CellData
     {
         public bool HasBuilding;
         public BuildingData Building;
@@ -18,26 +19,34 @@ namespace Code
     }
 
     [Serializable]
-    struct BuildingData
+    public struct BuildingData
     {
         public string TypeId;
         public byte Level;
     }
     
     [Serializable]
-    struct OrderData
+    public struct OrderData
     {
         public string TypeId;
         public DateTime StartTime;
     }
     
     [Serializable]
-    internal sealed class GameData : IDisposable
+    public class GameData : IDisposable
     {
-        [field:NonSerialized] public bool IsDirty { get; private set; }
+        [field:JsonIgnore] public bool IsDirty { get; private set; }
+
+        public DateTime SaveTime;
+        [field:JsonIgnore] public ObservableDictionary<Vector2Int, CellData> Cells;  //All data mush be of value types to ensure that CollectionChanged events are emitted correctly
+        [JsonProperty] public List<KeyValuePair<Vector2Int, CellData>> SerializedCells
+        {
+            get => Cells.ToList();
+            set { Cells = new ObservableDictionary<Vector2Int, CellData>(value.ToDictionary(x => x.Key, x => x.Value)); }
+        }
+        public ObservableDictionary<ResourceType, int> Resources;
         
-        public ObservableDictionary<Vector2Int, CellData> Cells;  //All data mush be of value types to ensure 
-        public ObservableDictionary<ResourceType, int> Resources; //that CollectionChanged events are emitted correctly
+        public GameData(){}
         
         public GameData(IEnumerable<Vector2Int> cellPositions)
         {
