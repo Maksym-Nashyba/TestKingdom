@@ -79,24 +79,5 @@ namespace Code
             });
             File.WriteAllText(_saveFilePath, json);
         }
-        
-        public class Vector2IntConverter : JsonConverter<Vector2Int>
-        {
-            public override void WriteJson(JsonWriter writer, Vector2Int value, JsonSerializer serializer)
-            {
-                writer.WriteValue(value.ToString());
-            }
-
-            public override Vector2Int ReadJson(JsonReader reader, Type objectType, Vector2Int existingValue, bool hasExistingValue, JsonSerializer serializer)
-            {
-                string vector2IntString = reader.Value.ToString();
-                Debug.Log(vector2IntString);
-                string[] parts = vector2IntString.Split(new[]{ '(', ')', ',', ' '}, StringSplitOptions.RemoveEmptyEntries);
-                int x = int.Parse(parts[0]);
-                int y = int.Parse(parts[1]); 
-                Vector2Int vector2Int = new Vector2Int(x, y);
-                return vector2Int;
-            }
-        }
     }
 }
